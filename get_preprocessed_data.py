@@ -6,20 +6,19 @@ Created on Sun Jun  3 19:48:15 2018
 """
 
 import importlib
-from resources import queries
+from resources.queries import *
+from resources.mappings import *
 from services import preprocessing_service
 from services.query_service import query_database
 import pandas as pd
 from functools import reduce
-
-importlib.reload(preprocessing_service)
 
 
 class DemographicData():
     
     def __get_ages(self):
         
-        ages = query_database(queries.AGE_QUERY)
+        ages = query_database(AGE_QUERY)
         
         ages['age'] = ages.apply(lambda x: x['age'] if x['age'] < 300 else 91.4, axis = 1)
         
@@ -27,24 +26,24 @@ class DemographicData():
         
     def __get_genders(self):
         
-        return query_database(queries.GENDER_QUERY)
+        return query_database(GENDER_QUERY)
     	
     
     def __get_marital_status(self):
         
-        marital_status_df = query_database(queries.MARITAL_STATUS_QUERY)
+        marital_status_df = query_database(MARITAL_STATUS_QUERY)
         
         return preprocessing_service.group_marital_status(marital_status_df)
     
     def __get_religion(self):
         
-        religion_df = query_database(queries.RELIGION_QUERY)
+        religion_df = query_database(RELIGION_QUERY)
         
         return preprocessing_service.group_religion(religion_df)
     
     def __get_ethnic_group(self):
         
-        ethnic_group_df = query_database(queries.ETHNICITY_QUERY)
+        ethnic_group_df = query_database(ETHNICITY_QUERY)
         
         return preprocessing_service.group_ethnic_groups(ethnic_group_df)
     
@@ -59,7 +58,29 @@ class DemographicData():
         demographic_dfs = [age, gender, marital_status, religion, ethnic_group]
         
         return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id'), demographic_dfs)
+    
+class LaboratoryMeasures():
+    
+    def get_lab_data(self):
+        
+        lab_results_dfs = []
+    
+        for measure in LAB_TEST:
             
+           lab_test_df = query_database(f'''SELECT 
+                                      hadm_id,
+                                      avg(valuenum) AS AVG_{measure['test']},
+                                      stddev(valuenum) AS STD_{measure['test']}
+                                      FROM labevents
+                                      WHERE itemid = {measure['itemid']} 
+                                      GROUP BY hadm_id
+                                      LIMIT 100 ''')
+           
+           lab_results_dfs.append(lab_test_df)
+          
+        return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id'), lab_results_dfs).fillna(0)
+    
+
 
 class AdministrativeData():
 
