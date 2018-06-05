@@ -25,7 +25,13 @@ MARITAL_STATUS_QUERY = """SELECT hadm_id, marital_status
 RELIGION_QUERY = """SELECT hadm_id, religion 
                     FROM admissions a
                     INNER JOIN patients p
-                    ON a.subject_id = p.subject_id"""                     
+                    ON a.subject_id = p.subject_id"""       
+
+ETHNICITY_QUERY = """SELECT hadm_id, ethnicity 
+                    FROM admissions a
+                    INNER JOIN patients p
+                    ON a.subject_id = p.subject_id"""             
+
                          
                 
 SERVICE_QUERY = """SELECT hadm_id, curr_service
