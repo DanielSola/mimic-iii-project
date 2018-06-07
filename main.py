@@ -12,6 +12,6 @@ from get_preprocessed_data import *
 sys.path.insert(0, os.path.dirname(os.path.realpath('__file__')))
 
     
-demographic_data = DemographicData().get_demographic_data()
+##demographic_data = DemographicData().get_demographic_data()
 
-lab_data         = LaboratoryMeasures().get_lab_data()
+##lab_data         = LaboratoryMeasures().get_lab_data()

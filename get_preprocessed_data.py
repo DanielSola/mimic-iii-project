@@ -12,7 +12,7 @@ from services import preprocessing_service
 from services.query_service import query_database
 import pandas as pd
 from functools import reduce
-
+importlib.reload(resources)
 
 class DemographicData():
     
@@ -59,7 +59,7 @@ class DemographicData():
         
         return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id'), demographic_dfs)
     
-class LaboratoryMeasures():
+class Measures():
     
     def get_lab_data(self):
         
@@ -79,8 +79,28 @@ class LaboratoryMeasures():
            lab_results_dfs.append(lab_test_df)
           
         return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id'), lab_results_dfs).fillna(0)
-    
 
+    def get_physio_data(self):
+        
+        physio_measures_dfs = []
+        
+        for measure in PHYSIO_MEASURES:
+            
+            print(f'''Querying {measure['name']}...''' )
+            
+            physio_measure = query_database(f'''SELECT 
+                                            hadm_id,
+                                            avg(valuenum) AS AVG_{measure['name']},
+                                            stddev(valuenum) AS STD_{measure['name']},
+                                            count(valuenum) AS COUNT_{measure['name']}
+                                            FROM chartevents
+                                            WHERE itemid in ({measure['itemid']})
+                                            GROUP BY hadm_id
+                                            LIMIT 20''')
+            physio_measures_dfs.append(physio_measure)
+            
+        return reduce(lambda left, right: pd.merge(left, right, how = 'outer', on = 'hadm_id'), a)
+    
 
 class AdministrativeData():
 
