@@ -8,11 +8,12 @@ Created on Sun Jun  3 19:48:15 2018
 import importlib
 from resources.queries import *
 from resources.mappings import *
+from services.preprocessing_service import *
 from services import preprocessing_service
 from services.query_service import query_database
 import pandas as pd
 from functools import reduce
-importlib.reload(resources)
+import numpy as np
 
 class DemographicData():
     
@@ -67,40 +68,61 @@ class Measures():
     
         for measure in LAB_TEST:
             
-           lab_test_df = query_database(f'''SELECT 
+            print(f'''Querying {measure['test']}...''' )
+            
+            lab_test_df = query_database(f'''SELECT 
                                       hadm_id,
                                       avg(valuenum) AS AVG_{measure['test']},
                                       stddev(valuenum) AS STD_{measure['test']}
                                       FROM labevents
-                                      WHERE itemid = {measure['itemid']} 
+                                      WHERE itemid in ({measure['itemid']} )
                                       GROUP BY hadm_id
-                                      LIMIT 100 ''')
+                                      ''')
+            
+            print('Returned ' + str(lab_test_df.shape[0]) + ' rows')
+            
+            ##lab_test_df.to_csv('C:\\Users\\Dani\\Desktop\\LAB_DATA\\'+str(measure['test'])+'.csv', sep = '\t')
            
-           lab_results_dfs.append(lab_test_df)
+            lab_results_dfs.append(lab_test_df)
           
-        return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id'), lab_results_dfs).fillna(0)
+        return reduce(lambda left, right: pd.merge(left,right, how = 'outer', on = 'hadm_id'), lab_results_dfs)
 
     def get_physio_data(self):
         
-        physio_measures_dfs = []
-        
+        icu_length_of_stay = query_database(f'''SELECT
+                                        hadm_id, 
+                                        sum(los) AS total_icu_time
+                                        FROM icustays
+                                        GROUP BY hadm_id
+                                        ORDER BY hadm_id
+                                        LIMIT 100''')
+
+        physio_measures_dfs = [];
+                
         for measure in PHYSIO_MEASURES:
             
             print(f'''Querying {measure['name']}...''' )
             
-            physio_measure = query_database(f'''SELECT 
+            physio_data = query_database(f'''SELECT 
                                             hadm_id,
                                             avg(valuenum) AS AVG_{measure['name']},
                                             stddev(valuenum) AS STD_{measure['name']},
-                                            count(valuenum) AS COUNT_{measure['name']}
+                                            count(valuenum) AS SAMPLES
                                             FROM chartevents
                                             WHERE itemid in ({measure['itemid']})
                                             GROUP BY hadm_id
-                                            LIMIT 20''')
-            physio_measures_dfs.append(physio_measure)
+                                            LIMIT 5''')     
             
-        return reduce(lambda left, right: pd.merge(left, right, how = 'outer', on = 'hadm_id'), a)
-    
+            physio_data = reduce(lambda left, right: pd.merge(left, right, how = 'outer', on = 'hadm_id'), [physio_data, icu_length_of_stay])
+            
+            filtered_data = PhysioPreprocess().discard_undersampled_outliers(physio_data)
+            
+            physio_measures_dfs.append(filtered_data)
+        
+        return physio_measures_dfs
+            
+      ##physio_measures = reduce(lambda left, right: pd.merge(left, right, how = 'outer', on = 'hadm_id'), physio_data)
+  
 
 class AdministrativeData():
 

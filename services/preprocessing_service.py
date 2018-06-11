@@ -4,8 +4,50 @@ Created on Sun Jun  3 19:06:14 2018
 
 @author: Daniel Solá
 """
-
+import numpy as np
 from resources.mappings import *
+
+class PhysioPreprocess():
+    
+    def check_outlier(self, value, avg, std):
+        if value > avg + 2*std or value < avg - 2*std:
+            return True 
+        else: 
+            return False
+    
+    def check_undersampled(self, samples, samples_avg, samples_std):
+        if samples < samples_avg - 2*samples_std:
+            return True
+        else:
+            return False
+        
+        
+    def discard_undersampled_outliers(self, physio_data):
+                
+        print('Discarding undersampled_outliers...')
+
+        physio_data['samples/day'] = physio_data['samples']/physio_data['total_icu_time']
+        
+        value_mean = np.nanmean(physio_data.iloc[:,1])
+        value_std = np.nanstd(physio_data.iloc[:,1])
+        
+        samples_mean = np.nanmean(physio_data['samples/day'])
+        samples_std = np.nanstd(physio_data['samples/day'])
+        
+        for index, row in physio_data.iterrows():
+            
+            if ( 
+                    self.check_outlier(row[1], value_mean, value_std) is True and
+                    self.check_undersampled(row[5], samples_mean, samples_std) is True       
+                ):
+                
+                physio_data.iloc[index, 1] = 'UNDERSAMPLED OUTLIER'
+                physio_data.iloc[index, 2] = 'UNDERSAMPLED OUTLIER'
+            
+            
+        return physio_data.iloc[:,0:3]
+    
+    
 
 def get_relevant_admission_service(hadm_id, services_df):
     
