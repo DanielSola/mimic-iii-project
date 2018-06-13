@@ -12,6 +12,7 @@ import pandas as pd
 
 sys.path.insert(0, os.path.dirname(os.path.realpath('__file__')))
 
-demographic_data = DemographicData().get_demographic_data()
-lab_data         = Measures().get_lab_data()
-##physio_data    = Measures().get_physio_data()
+##demographic_data = DemographicData().get_demographic_data()
+##lab_data         = Measures().get_lab_data()
+## Measures().get_physio_data()
+

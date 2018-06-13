@@ -80,12 +80,11 @@ class Measures():
                                       ''')
             
             print('Returned ' + str(lab_test_df.shape[0]) + ' rows')
+            print('Writing to CSV file...')
             
-            ##lab_test_df.to_csv('C:\\Users\\Dani\\Desktop\\LAB_DATA\\'+str(measure['test'])+'.csv', sep = '\t')
-           
-            lab_results_dfs.append(lab_test_df)
-          
-        return reduce(lambda left, right: pd.merge(left,right, how = 'outer', on = 'hadm_id'), lab_results_dfs)
+            lab_test_df.to_csv(f'''C:\\{measure['test']}.csv''', sep = '\t')
+
+        print('Exporting done')
 
     def get_physio_data(self):
         
@@ -95,9 +94,7 @@ class Measures():
                                         FROM icustays
                                         GROUP BY hadm_id
                                         ORDER BY hadm_id
-                                        LIMIT 100''')
-
-        physio_measures_dfs = [];
+                                        ''')
                 
         for measure in PHYSIO_MEASURES:
             
@@ -111,17 +108,19 @@ class Measures():
                                             FROM chartevents
                                             WHERE itemid in ({measure['itemid']})
                                             GROUP BY hadm_id
-                                            LIMIT 5''')     
+                                            ''')     
             
             physio_data = reduce(lambda left, right: pd.merge(left, right, how = 'outer', on = 'hadm_id'), [physio_data, icu_length_of_stay])
             
             filtered_data = PhysioPreprocess().discard_undersampled_outliers(physio_data)
             
-            physio_measures_dfs.append(filtered_data)
-        
-        return physio_measures_dfs
+            print('Writing to CSV file...')
             
-      ##physio_measures = reduce(lambda left, right: pd.merge(left, right, how = 'outer', on = 'hadm_id'), physio_data)
+            filtered_data.to_csv(f'''C:\\{measure['name']}.csv''', sep = '\t')
+            
+        print('Exporting finished')
+        
+            
   
 
 class AdministrativeData():
