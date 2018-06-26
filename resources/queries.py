@@ -2,7 +2,7 @@
 """
 Created on Sun Jun  3 19:50:42 2018
 
-@author: Tiendeo
+@author: Daniel Solá
 """
 
 AGE_QUERY = """SELECT hadm_id, EXTRACT(epoch FROM (admittime - dob))/(3600*24*365)
@@ -38,4 +38,8 @@ SERVICE_QUERY = """SELECT hadm_id, curr_service
                     FROM services
                     ORDER BY hadm_id ASC"""
                     
-                
+DIAG_ICD9_CODES_QUERY = """SELECT hadm_id, diagnoses_icd.icd9_code
+                            FROM diagnoses_icd 
+                            INNER JOIN d_icd_diagnoses 
+                            ON diagnoses_icd.icd9_code = d_icd_diagnoses.icd9_code
+                            WHERE seq_num = 1"""

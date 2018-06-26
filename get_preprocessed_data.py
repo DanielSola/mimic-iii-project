@@ -58,8 +58,12 @@ class DemographicData():
         
         demographic_dfs = [age, gender, marital_status, religion, ethnic_group]
         
-        return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id'), demographic_dfs)
-    
+        demo_data = reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id'), demographic_dfs)
+        
+        demo_data.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\DEMOGRAPHIC_DATA\\DEMO_DATA.csv''', sep = '\t')
+
+        print('DEMOGRAPHIC DATA EXPORTING FINISHED')
+        
 class Measures():
     
     def get_lab_data(self):
@@ -82,7 +86,7 @@ class Measures():
             print('Returned ' + str(lab_test_df.shape[0]) + ' rows')
             print('Writing to CSV file...')
             
-            lab_test_df.to_csv(f'''C:\\{measure['test']}.csv''', sep = '\t')
+            lab_test_df.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\LAB_DATA\\{measure['test']}.csv''', sep = '\t')
 
         print('Exporting done')
 
@@ -116,7 +120,7 @@ class Measures():
             
             print('Writing to CSV file...')
             
-            filtered_data.to_csv(f'''C:\\{measure['name']}.csv''', sep = '\t')
+            filtered_data.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\PHYSIO_DATA\\{measure['name']}.csv''', sep = '\t')
             
         print('Exporting finished')
         
@@ -125,14 +129,44 @@ class Measures():
 
 class AdministrativeData():
 
-    def get_services():
+    def get_services(self):
+        
+        print('Querying admission services...');
     
-        services = query_database(queries.SERVICE_QUERY)
-            
+        services = query_database(SERVICE_QUERY);
+        
+        print('Preprocessing data...')
+
         relevant_services_list = list(services.apply(lambda x: preprocessing_service.get_relevant_admission_service(x['hadm_id'], services), axis = 1))
     
         relevant_services_df = pd.DataFrame(relevant_services_list, columns = ['hadm_id','service'])
     
-        return relevant_services_df.groupby("hadm_id").first()
+        preprocessed_service_data = relevant_services_df.groupby("hadm_id").first();
+        
+        print('Writing to CSV file...')
+
+        preprocessed_service_data.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\ADMINISTRATIVE_DATA\\SERVICES.csv''', sep = '\t')
+
+    
+    def get_icd9_diag_codes(self):
+        
+        print('Querying ICD9 diagnostic codes...');
+
+        icd9_codes = query_database(DIAG_ICD9_CODES_QUERY);
+        
+        print('Preprocessing data...')
+        
+        icd9_codes['icd9_group'] = icd9_codes.apply(lambda x: preprocessing_service.group_diag_icd9_code(x['icd9_code']), axis = 1)
+
+        preprocessed_icd9_diag_codes = icd9_codes[['hadm_id', 'icd9_group']];
+        
+        print('Writing to CSV file...')
+        
+        preprocessed_icd9_diag_codes.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\ADMINISTRATIVE_DATA\\ICD9_DIAG.csv''', sep = '\t')
+
+        
+
+        
+        
     
 

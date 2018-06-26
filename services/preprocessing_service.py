@@ -21,7 +21,6 @@ class PhysioPreprocess():
         else:
             return False
         
-        
     def discard_undersampled_outliers(self, physio_data):
                 
         print('Discarding undersampled_outliers...')
@@ -101,3 +100,53 @@ def get_admission_number(admissions_df):
 				})
     
 	return pd.DataFrame(previous_admissions)  
+
+def group_diag_icd9_code(icd9_code):
+    
+    
+    if not 'V' in icd9_code and not 'E' in icd9_code:
+        
+        truncated_code = int((icd9_code)[0:3]);
+        
+        if truncated_code > 0 and truncated_code <= 139:
+            return 'infectious and parasitic diseases';
+        if truncated_code > 139 and truncated_code <= 239:
+            return 'neoplasms';
+        if truncated_code > 239 and truncated_code <= 279:
+            return 'endocrine, nutritional and metabolic diseases, and immunity disorders';
+        if truncated_code > 279 and truncated_code <= 289:
+            return 'diseases of the blood and blood-forming organs';
+        if truncated_code > 289 and truncated_code <= 319:
+            return 'mental disorders';
+        if truncated_code > 320 and truncated_code <= 389:
+            return 'diseases of the nervous system and sense organs';
+        if truncated_code > 389 and truncated_code <= 459:
+            return 'diseases of the circulatory system';
+        if truncated_code > 459 and truncated_code <= 519:
+            return 'diseases of the respiratory system';
+        if truncated_code > 519 and truncated_code <= 579:
+            return 'diseases of the digestive system';
+        if truncated_code > 579 and truncated_code <= 629:
+            return 'diseases of the genitourinary system';
+        if truncated_code > 629 and truncated_code <= 679:
+            return 'complications of pregnancy, childbirth, and the puerperium';
+        if truncated_code > 679 and truncated_code <= 709:
+            return 'diseases of the skin and subcutaneous tissue';
+        if truncated_code > 709 and truncated_code <= 739:
+            return 'diseases of the musculoskeletal system and connective tissue';
+        if truncated_code > 739 and truncated_code <= 759:
+            return 'congenital anomalies';
+        if truncated_code > 759 and truncated_code <= 779:
+            return 'certain conditions originating in the perinatal period';        
+        if truncated_code > 779 and truncated_code <= 799:
+            return 'symptoms, signs, and ill-defined conditions';       
+        if truncated_code > 799 and truncated_code <= 999:
+            return 'injury and poisoning';                         
+    if 'E' in icd9_code: 
+        return 'external causes of injury';
+    if 'V' in icd9_code: 
+        return 'supplementary classification of factors influencing health status';
+    
+    
+    
+    

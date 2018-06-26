@@ -3,6 +3,7 @@
 import sys
 import pandas as pd
 import os, sys
+from functools import reduce
 
 all_data = []
 #Import all csv files in mimic_data folder
@@ -12,3 +13,4 @@ for root, dirs, files in os.walk(os.getcwd()+'/mimic_data'):
             imported_data = pd.read_csv(root + '/' + name, sep = '\t')
             all_data.append(imported_data)
             
+data = reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id', how = 'outer'), all_data)
