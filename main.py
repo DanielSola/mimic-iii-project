@@ -15,5 +15,4 @@ sys.path.insert(0, os.path.dirname(os.path.realpath('__file__')))
 ##DemographicData().get_demographic_data();
 ##Measures().get_lab_data();
 ##Measures().get_physio_data();
-
-##AdministrativeData().get_icd9_diag_codes();
+##AdministrativeData().get_surgery_flags();

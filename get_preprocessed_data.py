@@ -124,8 +124,6 @@ class Measures():
             
         print('Exporting finished')
         
-            
-  
 
 class AdministrativeData():
 
@@ -162,8 +160,41 @@ class AdministrativeData():
         
         print('Writing to CSV file...')
         
-        preprocessed_icd9_diag_codes.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\ADMINISTRATIVE_DATA\\ICD9_DIAG.csv''', sep = '\t')
+        preprocessed_icd9_diag_codes.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\ADMINISTRATIVE_DATA\\ICD9_DIAG.csv''', sep = '\t');
 
+    def get_surgery_flags(self):
+        
+        def convert_flag_to_category(flag):
+            if flag == 2:
+                return 'NARROW'
+            if flag == 1:
+                return 'BROAD'
+            else:
+                return 'NO SURGERY'
+        
+        print('Getting surgery flags...');
+        
+        surgery_flags = pd.read_csv('C:\\mimic-iii-project\\resources\\surgery_flags_i9_2015.csv');
+        
+        surgery_flags.columns = ['ICD9_PROC_CODE','SURGERY_FLAG','DESC'];
+        
+        surgery_flags['ICD9_PROC_CODE'] = surgery_flags.apply(lambda x: int(x['ICD9_PROC_CODE'][1:5]), axis = 1)
+        surgery_flags['SURGERY_FLAG'] = surgery_flags.apply(lambda x: int(x['SURGERY_FLAG'][1:2]), axis = 1)
+        
+        icd9_proc_codes = query_database(PROC_ICD9_CODES_QUERY);
+        
+        icd9_proc_codes['icd9_code'] = icd9_proc_codes['icd9_code'].astype(int);
+        
+        merge = pd.merge(surgery_flags, icd9_proc_codes, left_on='ICD9_PROC_CODE', right_on='icd9_code', how = 'outer');
+
+        merge['SURGERY_FLAG'] = merge['SURGERY_FLAG'].map(lambda x: convert_flag_to_category(x));
+        
+        df_surgery_flags = merge[['hadm_id','SURGERY_FLAG']].dropna();
+        
+        print('Writing to file...')
+        
+        df_surgery_flags.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\ADMINISTRATIVE_DATA\\SURGERY_FLAGS.csv''', sep = '\t');
+        
         
 
         

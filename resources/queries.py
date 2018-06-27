@@ -43,3 +43,9 @@ DIAG_ICD9_CODES_QUERY = """SELECT hadm_id, diagnoses_icd.icd9_code
                             INNER JOIN d_icd_diagnoses 
                             ON diagnoses_icd.icd9_code = d_icd_diagnoses.icd9_code
                             WHERE seq_num = 1"""
+                            
+PROC_ICD9_CODES_QUERY = """ SELECT hadm_id, procedures_icd.icd9_code
+                            FROM procedures_icd 
+                            INNER JOIN d_icd_procedures
+                            ON procedures_icd.icd9_code = d_icd_procedures.icd9_code
+                            AND seq_num = 1"""
