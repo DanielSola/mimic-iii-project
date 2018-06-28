@@ -49,3 +49,31 @@ PROC_ICD9_CODES_QUERY = """ SELECT hadm_id, procedures_icd.icd9_code
                             INNER JOIN d_icd_procedures
                             ON procedures_icd.icd9_code = d_icd_procedures.icd9_code
                             AND seq_num = 1"""
+                            
+ICU_LOS_QUERY = """SELECT hadm_id, los AS icu_stay_los_days
+                   FROM icustays """
+                   
+TOTAL_LOS_QUERY = """SELECT hadm_id, EXTRACT(epoch FROM(dischtime - admittime))/(3600*24) AS total_los_days
+                     FROM admissions"""
+                     
+PREVIOUS_ADMISSIONS_QUERY = """SELECT hadm_id, subject_id, admittime
+                               FROM admissions
+                               ORDER BY admittime ASC"""
+                               
+PROCEDURE_COUNT_QUERY = """SELECT hadm_id, count(*) AS procedure_count
+                            FROM procedures_icd
+                            GROUP BY hadm_id"""
+                            
+MECHANICAL_VENTILATION_TIME_QUERY = """SELECT hadm_id, SUM(duration_hours) AS total_mech_vent_time
+                                        FROM ventdurations v
+                                        INNER JOIN icustays i
+                                        ON v.icustay_id = i.icustay_id
+                                        GROUP BY hadm_id"""
+                                        
+SEVERITY_SCORES_QUERY = """SELECT o.hadm_id, AVG(o.oasis) AS oasis_avg, AVG(so.sofa) AS sofa_avg, AVG(sa.saps) as saps_avg
+                            FROM oasis o
+                            INNER JOIN sofa so
+                            ON o.hadm_id = so.hadm_id
+                            INNER JOIN saps sa
+                            ON sa.hadm_id = so.hadm_id
+                            GROUP BY o.hadm_id"""

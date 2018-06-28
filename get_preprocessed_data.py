@@ -60,12 +60,29 @@ class DemographicData():
         
         demo_data = reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id'), demographic_dfs)
         
-        demo_data.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\DEMOGRAPHIC_DATA\\DEMO_DATA.csv''', sep = '\t')
+        demo_data.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\DEMOGRAPHIC_DATA\\DEMO_DATA.csv''', sep = '\t');
 
         print('DEMOGRAPHIC DATA EXPORTING FINISHED')
         
 class Measures():
     
+    def get_severity_scores(self):
+        
+        print('Querying database...');
+        
+        severity_scores = query_database(SEVERITY_SCORES_QUERY);
+        
+        severity_scores.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\HOSPITAL_DATA\\SEVERITY_SCORES.csv''', sep = '\t');
+    
+    def get_mechanical_ventilation_time(self):
+        
+        print('Querying database...');
+        
+        mechanical_ventilation_time = query_database(MECHANICAL_VENTILATION_TIME_QUERY);
+        
+        mechanical_ventilation_time.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\HOSPITAL_DATA\\MECH_VENT_TIME.csv''', sep = '\t');
+        
+        
     def get_lab_data(self):
         
         lab_results_dfs = []
@@ -195,9 +212,47 @@ class AdministrativeData():
         
         df_surgery_flags.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\ADMINISTRATIVE_DATA\\SURGERY_FLAGS.csv''', sep = '\t');
         
+    def get_icu_length_of_stay(self):
         
+        icu_los = query_database(ICU_LOS_QUERY);
+
+        print('Writing to file...')
+        
+        icu_los.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\ADMINISTRATIVE_DATA\\ICU_LOS.csv''', sep = '\t');
+        
+    def get_total_length_of_stay(self):
+        
+        total_los = query_database(TOTAL_LOS_QUERY);
+        
+        print('Writing to file...');
+        
+        total_los.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\ADMINISTRATIVE_DATA\\TOTAL_LOS.csv''', sep = '\t');
+
+    def get_previous_admissions_count(self):
+        
+        admissions = query_database(PREVIOUS_ADMISSIONS_QUERY);
+        
+        admission_count = get_admission_number(admissions);
+        
+        print('Writing to file...');
+
+        
+        admission_count.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\ADMINISTRATIVE_DATA\\PREVIOUS_ADMISSION_COUNT.csv''', sep = '\t');
+
+        
+    def get_procedure_count(self):
+        
+        procedure_counts = query_database(PROCEDURE_COUNT_QUERY);
+        
+        print('Writing to file...');
+
+        procedure_counts.to_csv(f'''C:\\mimic-iii-project\\mimic_data\\ADMINISTRATIVE_DATA\\PROCEDURE_COUTNS.csv''', sep = '\t');
 
         
         
+        
+        
+        
+
     
 

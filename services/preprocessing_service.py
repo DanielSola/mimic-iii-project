@@ -6,6 +6,7 @@ Created on Sun Jun  3 19:06:14 2018
 """
 import numpy as np
 from resources.mappings import *
+import pandas as pd
 
 class PhysioPreprocess():
     
@@ -85,24 +86,24 @@ def group_ethnic_groups(ethnic_group_df):
     return ethnic_group_df
 
 
-def get_admission_number(admissions_df):
+def get_admission_number(admissions):
 
-	for index, row in admissions.iterrows():
+    already_admitted_subjects = [];
+    previous_admissions = [];
+    for (index, row) in admissions.iterrows():
     
-		already_admitted_subjects.append(row.subject_id)
+        already_admitted_subjects.append(row.subject_id)
     
-		admissions_count = already_admitted_subjects.count(row.subject_id)
+        admissions_count = already_admitted_subjects.count(row.subject_id)
+        previous_admissions.append({
+    				'subject_id':row.subject_id,
+    				'hadm_id':row.hadm_id,
+    				'admissions_count':admissions_count
+    				})
     
-		previous_admissions.append({
-				'subject_id':row.subject_id,
-				'hadm_id':row.hadm_id,
-				'admissions_count':admissions_count
-				})
-    
-	return pd.DataFrame(previous_admissions)  
+    return pd.DataFrame(previous_admissions)  
 
 def group_diag_icd9_code(icd9_code):
-    
     
     if not 'V' in icd9_code and not 'E' in icd9_code:
         

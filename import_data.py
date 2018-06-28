@@ -10,7 +10,7 @@ all_data = []
 for root, dirs, files in os.walk(os.getcwd()+'/mimic_data'):
     for name in files:
         if name.endswith('.csv'):
-            imported_data = pd.read_csv(root + '/' + name, sep = '\t')
+            imported_data = pd.read_csv(root + '/' + name, sep = '\t');
             all_data.append(imported_data)
             
 data = reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id', how = 'outer'), all_data)
