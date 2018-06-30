@@ -24,15 +24,13 @@ class PhysioPreprocess():
         
     def discard_undersampled_outliers(self, physio_data):
                 
-        print('Discarding undersampled_outliers...')
-
-        physio_data['samples/day'] = physio_data['samples']/physio_data['total_icu_time']
+        physio_data['samples/day'] = physio_data['samples']/physio_data['total_icu_time'];
         
-        value_mean = np.nanmean(physio_data.iloc[:,1])
-        value_std = np.nanstd(physio_data.iloc[:,1])
+        value_mean = np.nanmean(physio_data.iloc[:,1]);
+        value_std = np.nanstd(physio_data.iloc[:,1]);
         
-        samples_mean = np.nanmean(physio_data['samples/day'])
-        samples_std = np.nanstd(physio_data['samples/day'])
+        samples_mean = np.nanmean(physio_data['samples/day']);
+        samples_std = np.nanstd(physio_data['samples/day']);
         
         for index, row in physio_data.iterrows():
             
@@ -41,11 +39,10 @@ class PhysioPreprocess():
                     self.check_undersampled(row[5], samples_mean, samples_std) is True       
                 ):
                 
-                physio_data.iloc[index, 1] = 'UNDERSAMPLED OUTLIER'
-                physio_data.iloc[index, 2] = 'UNDERSAMPLED OUTLIER'
+                physio_data.iloc[index, 1] = 'UNDERSAMPLED OUTLIER';
+                physio_data.iloc[index, 2] = 'UNDERSAMPLED OUTLIER';
             
-            
-        return physio_data.iloc[:,0:3]
+        return physio_data.iloc[:,0:3];
     
     
 
@@ -68,24 +65,31 @@ def get_relevant_admission_service(hadm_id, services_df):
         return (hadm_id, general_medicine_service[0])
     
 def group_marital_status(marital_status_df):
-    
 
-    marital_status_df['marital_status'] = marital_status_df['marital_status'].map(MARITAL_STATUS_GROUPS)
-    return marital_status_df
+    marital_status_df['marital_status'] = marital_status_df['marital_status'].map(MARITAL_STATUS_GROUPS);
+    
+    return marital_status_df;
 
 def group_religion(religion_df):
     
-    religion_df['religion'] = religion_df['religion'].map(RELIGION_GROUPS)
+    religion_df['religion'] = religion_df['religion'].map(RELIGION_GROUPS);
     
-    return religion_df
+    return religion_df;
 
 def group_ethnic_groups(ethnic_group_df):
     
-    ethnic_group_df['ethnicity'] = ethnic_group_df['ethnicity'].map(ETHNIC_GROUPS)
+    ethnic_group_df['ethnicity'] = ethnic_group_df['ethnicity'].map(ETHNIC_GROUPS);
     
-    return ethnic_group_df
+    return ethnic_group_df;
 
-
+def convert_surgery_flag_to_category(flag):
+    if flag == 2:
+        return 'NARROW';
+    if flag == 1:
+        return 'BROAD';
+    else:
+        return 'NO SURGERY';
+    
 def get_admission_number(admissions):
 
     already_admitted_subjects = [];
@@ -101,7 +105,7 @@ def get_admission_number(admissions):
     				'admissions_count':admissions_count
     				})
     
-    return pd.DataFrame(previous_admissions)  
+    return pd.DataFrame(previous_admissions);
 
 def group_diag_icd9_code(icd9_code):
     
@@ -148,6 +152,36 @@ def group_diag_icd9_code(icd9_code):
     if 'V' in icd9_code: 
         return 'supplementary classification of factors influencing health status';
     
+
+def extract_readmissions(admissions_data):
     
+    total_readmissions = [];
+    for index in range(admissions_data.shape[0] - 1):
+        if admissions_data.ix[index].subject_id == admissions_data.ix[index + 1].subject_id:
+            if (admissions_data.ix[index + 1].admittime - admissions_data.ix[index].dischtime).days < (30 * 6):
+                readmission = '0-6 months';
+            else:
+                readmission = '6+ months';
+        else:
+            readmission = 'no-readmission';
     
+        total_readmissions.append({
+                    'hadm_id': admissions_data.ix[index].hadm_id, 
+                    'readmission': readmission
+                    });
     
+    return pd.DataFrame(total_readmissions);
+
+def extract_readmission_time(admissions_data):
+    
+    readmission_times = [];
+    for index in range(admissions_data.shape[0] - 1):
+        if admissions_data.ix[index].subject_id == admissions_data.ix[index + 1].subject_id:
+            readmission_days = (admissions_data.ix[index + 1].admittime - admissions_data.ix[index].dischtime).days
+            if readmission_days > 0.5:
+                readmission_times.append({
+                        'hadm_id': admissions_data.ix[index].hadm_id, 
+                        'readmission_days': readmission_days
+                        });
+    
+    return pd.DataFrame(readmission_times);
