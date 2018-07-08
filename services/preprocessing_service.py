@@ -45,6 +45,17 @@ class PhysioPreprocess():
         return physio_data.iloc[:,0:3];
     
     
+def remove_outliers(data, column_index, low_quantile, high_quantile):
+    
+    low_quantile_value = float(data.iloc[:, column_index].quantile(low_quantile));
+    high_quantile_value = float(data.iloc[:, column_index].quantile(high_quantile));
+
+    data.iloc[:,column_index] = data.iloc[:,column_index].apply(lambda x: x if (x <= high_quantile_value and x >= low_quantile_value)  else np.NaN);
+    
+    return data;
+    
+    
+    
 
 def get_relevant_admission_service(hadm_id, services_df):
     

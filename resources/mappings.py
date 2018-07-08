@@ -89,7 +89,7 @@ LAB_TEST = [{'test' : 'BLOOD_UREA_NITROGEN'  , 'itemid' : '51006'},
             {'test' : 'BLOOD_GLUCOSE'        , 'itemid' : '50809,50931'},
             {'test' : 'ALBUMIN'              , 'itemid':'50862'}]
 
-PHYSIO_MEASURES = [{'name': 'HR', 'itemid': '220045, 212, 211'},
+PHYSIO_MEASURES = [{'name': 'HR', 'itemid': '220045, 211'},
                    {'name':'RESP_RATE', 'itemid': '8113, 3603, 220210, 618'},
                    {'name':'SYS_PRESS', 'itemid': '51,442,455,6701,220179,220050'},
                    {'name':'DIAS_PRESS','itemid': '8368,8440,8441,8555,220180,220051'},

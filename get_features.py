@@ -61,14 +61,6 @@ class DemographicData():
         return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id'), demographic_dfs);
         
 class Measures():
-    
-    def get_severity_scores(self):
-                
-        return query_database(SEVERITY_SCORES_QUERY);
-    
-    def get_mechanical_ventilation_time(self):
-                
-        return query_database(MECHANICAL_VENTILATION_TIME_QUERY);
                 
     def get_lab_data(self):
         
@@ -85,16 +77,17 @@ class Measures():
                                          FROM labevents
                                          WHERE itemid in ({measure['itemid']} )
                                          GROUP BY hadm_id'''
-                                         );
+                                         );            
             
-            lab_results_dfs.append(lab_test_df);
+            filtered_data = remove_outliers(lab_test_df, 1, 0.01, 0.99);
+                                    
+            lab_results_dfs.append(filtered_data);
 
-        return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id'), lab_results_dfs);
+        return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id', how = 'outer'), lab_results_dfs);
 
             
     def get_physio_data(self):
         
-        icu_length_of_stay = query_database(ICU_LOS_QUERY);
         all_physio_data = [];
                 
         for measure in PHYSIO_MEASURES:
@@ -104,20 +97,20 @@ class Measures():
             physio_data = query_database(f'''SELECT 
                                             hadm_id,
                                             avg(valuenum) AS AVG_{measure['name']},
-                                            stddev(valuenum) AS STD_{measure['name']},
-                                            count(valuenum) AS SAMPLES
+                                            stddev(valuenum) AS STD_{measure['name']}
                                             FROM chartevents
                                             WHERE itemid in ({measure['itemid']})
                                             GROUP BY hadm_id
-                                            ''')     
+                                            ''');
             
-            physio_data = reduce(lambda left, right: pd.merge(left, right, how = 'outer', on = 'hadm_id'), [physio_data, icu_length_of_stay]);
-            filtered_data = PhysioPreprocess().discard_undersampled_outliers(physio_data);
-            all_physio_data.append(filtered_data);
+            filtered_avg_data = remove_outliers(physio_data, 1, 0.01, 0.99);
+            filtered_all_data = remove_outliers(physio_data, 2, 0.01, 0.99);
+
+            all_physio_data.append(filtered_all_data);
             
-        return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id'), all_physio_data);
+        return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id', how = 'outer'), all_physio_data);
             
-class AdministrativeData():
+class ICUData():
 
     def _get_services(self):
             
@@ -168,7 +161,15 @@ class AdministrativeData():
         
         return query_database(PROCEDURE_COUNT_QUERY);
     
-    def get_administrative_data(self):
+    def _get_severity_scores(self):
+                
+        return query_database(SEVERITY_SCORES_QUERY);
+    
+    def _get_mechanical_ventilation_time(self):
+                
+        return query_database(MECHANICAL_VENTILATION_TIME_QUERY);
+    
+    def get_icu_data(self):
         
         admission_service         = self._get_services();
         icd9_diags                = self._get_icd9_diag_codes();
@@ -177,10 +178,20 @@ class AdministrativeData():
         total_los                 = self._get_total_length_of_stay();
         previous_admissions_count = self._get_previous_admissions_count();
         procedure_count           = self._get_procedure_count();
+        severity_scores           = self._get_severity_scores();
+        mechanical_vent_time      = self._get_mechanical_ventilation_time();
         
-        admin_dfs = [admission_service, icd9_diags, surgery_flags, icu_los, total_los, previous_admissions_count, procedure_count ];
+        icu_dfs = [admission_service,
+                     icd9_diags,
+                     surgery_flags,
+                     icu_los,
+                     total_los,
+                     previous_admissions_count,
+                     procedure_count,
+                     severity_scores,
+                     mechanical_vent_time];
         
-        return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id'), admin_dfs);
+        return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id', how = 'outer'), icu_dfs);
 
         
 
