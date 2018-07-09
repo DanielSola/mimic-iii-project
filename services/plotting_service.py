@@ -3,9 +3,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 class PlottingService():
+    sns.set_style("darkgrid");
     
-    def plot_kde(self, data, title, xlabel, ylabel):
-        ax = sns.kdeplot(data, shade = True);
+    def plot_kde(self, data, title, xlabel, ylabel, xlimit):
+        filtered_data = data[data < xlimit]
+        ax = sns.kdeplot(filtered_data, shade = True);
         ax.set_title(title);
         ax.set_xlabel(xlabel);
         ax.set_ylabel(ylabel);
@@ -18,11 +20,11 @@ class PlottingService():
         
     def plot_countplot(self, data, title, xlabel, ylabel):
         
-        ax = sns.countplot(data);
+        ax = sns.countplot(data, orient);
         ax.set_title(title);
         ax.set_xlabel(xlabel);
         ax.set_ylabel(ylabel);
-        plt.xticks(rotation=50)
+        plt.xticks(rotation=45)
         
     def jointplot(self, x_data, y_data, xlabel, ylabel):
         
@@ -30,6 +32,13 @@ class PlottingService():
         data.columns = [xlabel, ylabel];
 
         ax = sns.jointplot(x = data.columns[0], y = data.columns[1], data=data,  kind="kde");
+        ax.set_title(title);
+        ax.set_xlabel(xlabel);
+        ax.set_ylabel(ylabel);
+    
+    def boxplot(self, data, title, xlabel, ylabel):
+        
+        ax = sns.boxplot(data, shade = True);
         ax.set_title(title);
         ax.set_xlabel(xlabel);
         ax.set_ylabel(ylabel);
