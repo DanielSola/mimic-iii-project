@@ -12,8 +12,9 @@ class PlottingService():
         ax.set_xlabel(xlabel);
         ax.set_ylabel(ylabel);
         
-    def plot_hist(self, data, title, xlabel, ylabel, bins):
-        ax = sns.distplot(data, kde = False, bins = bins);
+    def plot_hist(self, data, title, xlabel, ylabel, bins, xlimit):
+        filtered_data = data[data < xlimit]
+        ax = sns.distplot(filtered_data, kde = False, bins = bins);
         ax.set_title(title);
         ax.set_xlabel(xlabel);
         ax.set_ylabel(ylabel);

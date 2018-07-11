@@ -109,6 +109,15 @@ class Measures():
             all_physio_data.append(filtered_all_data);
             
         return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id', how = 'outer'), all_physio_data);
+    
+    def get_measures(self):
+        
+        lab_data = self.get_lab_data();
+        physio_data = self.get_physio_data();
+        
+        measures = [lab_data, physio_data];
+        
+        return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id', how = 'outer'), measures);
             
 class ICUData():
 
@@ -171,14 +180,23 @@ class ICUData():
     
     def get_icu_data(self):
         
+        print('Querying admission service');
         admission_service         = self._get_services();
+        print('Querying ICD9 diag codes');
         icd9_diags                = self._get_icd9_diag_codes();
+        print('Querying Surgery Flags');
         surgery_flags             = self._get_surgery_flags();
+        print('Querying ICU length of stay');
         icu_los                   = self._get_icu_length_of_stay();
+        print('Querying Hospital length of stay');
         total_los                 = self._get_total_length_of_stay();
+        print('Querying previous admission count');
         previous_admissions_count = self._get_previous_admissions_count();
+        print('Querying procedure counts');
         procedure_count           = self._get_procedure_count();
+        print('Querying severity scores');
         severity_scores           = self._get_severity_scores();
+        print('Querying mechanical ventilation time');
         mechanical_vent_time      = self._get_mechanical_ventilation_time();
         
         icu_dfs = [admission_service,
@@ -191,14 +209,15 @@ class ICUData():
                      severity_scores,
                      mechanical_vent_time];
         
-        return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id', how = 'outer'), icu_dfs);
-
+        
+        merged_icu_data = reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id', how = 'outer'), icu_dfs);
+            
+        merged_icu_data['total_mech_vent_time'].fillna(0, inplace = True);
+        
+        return merged_icu_data;
         
 
 
-        
-        
-        
         
         
 
