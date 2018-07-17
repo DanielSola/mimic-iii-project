@@ -13,10 +13,19 @@ Work in progress:
 - [x] Access and install MIMIC database
 - [x] Define relevant features
 - [x] Create queries to extract data
-- [x] Preprocess data
-- [ ] Explore and plot features and relationships
-- [ ] Design neural network 
-- [ ] Train and evaluate network 
+- [x] Preprocess mimic data
+- [x] Explore and plot features and relationships
+- [x] Prepare data to neural networks
+- [ ] Design, train and evaluate neural networks
+  - [x] Readmission labels
+  - [ ] Readmission time delta
+  - [ ] Mortality labels
+  - [ ] Mortality time delta
+
+Neural networks:
+- Readmission labels:
+  - Accuracy: 85%
+  - Loss: 0.34 
 
 Due date: October 2018
 
