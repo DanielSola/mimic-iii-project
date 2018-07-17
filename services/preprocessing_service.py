@@ -155,3 +155,12 @@ def extract_readmission_time(admissions_data):
                         });
     
     return pd.DataFrame(readmission_times);
+
+#Auxiliary function to convert dataframes to markdown for exporting
+def df_to_markdown(df, float_format='%.2g'):
+    from os import linesep
+    return linesep.join([
+        '|'.join(df.columns),
+        '|'.join(4 * '-' for i in df.columns),
+        df.to_csv(sep='|', index=False, header=False, float_format=float_format)
+    ]).replace('|', ' | ')
