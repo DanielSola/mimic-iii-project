@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 MIMIC-III Project
 @author: Daniel Solá
@@ -16,11 +17,11 @@ from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_
 #Extraction of features
 features = Features().get_nn_features();
 categorical_labels = PatientOutcomes().get_categorical_outcomes();
-label = pd.DataFrame(categorical_labels.mortality);
+label = pd.DataFrame(categorical_labels.readmission);
 data = pd.merge(features, label, left_index = True, right_index = True, how = 'inner').dropna();
 #Spliting of data in test / train sets
 features = data.loc[:, 'F':'total_mech_vent_time'];
-label = data.mortality;
+label = data.readmission;
 hot_encoded_label = pd.get_dummies(label);
 
 
@@ -43,11 +44,6 @@ model.fit(X_train, y_train,epochs=3, batch_size=1, verbose=1)
 #Evaluating model
 y_pred = model.predict(X_test);
 score = model.evaluate(X_test, y_test,verbose=1)
-roc_auc_score(y_test, y_pred);
+roc_score = roc_auc_score(y_test, y_pred);
 
-#ROC_AUC_SCORE = 0.866
-
-
-
-
-
+#ROC_AUC_SCORE = 0.778

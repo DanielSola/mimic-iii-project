@@ -92,12 +92,8 @@ MORTALITY_QUERY = """
     									
     									WHEN
     										EXTRACT(epoch FROM (dod-dischtime))/(3600*24*30) < 6 AND
-    										EXTRACT(epoch FROM (dod-dischtime))/(3600*24*30) > 0.1
+    										EXTRACT(epoch FROM (dod-dischtime))/(3600*24*30) > -0.5
     									THEN '0-6 months'	
-    									
-                        	WHEN 
-    										EXTRACT(epoch FROM (dod-dischtime))/(3600*24*30) < 0.1 							
-                        	THEN 'in-hospital'
     									
     									END
     

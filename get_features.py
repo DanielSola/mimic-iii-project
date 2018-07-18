@@ -4,7 +4,6 @@ Created on Sun Jun  3 19:48:15 2018
 
 @author: Daniel Solá
 """
-
 import importlib
 from resources.queries import *
 from resources.mappings import *
@@ -16,6 +15,16 @@ from functools import reduce
 import numpy as np
 
 class Features():
+    
+    def get_nn_features(self):
+
+        categorical_features = self.get_categorical_features();
+        numerical_features = self.get_numerical_features();        
+        numerical_features_to_nn = preprocessing_service.prepare_numerical_features(numerical_features);
+        categorical_features_to_nn = preprocessing_service.hot_encode_categorical_features(categorical_features);       
+        
+        return pd.merge(categorical_features_to_nn, numerical_features_to_nn, left_index = True, right_index = True, how = 'inner');
+
     
     def get_numerical_features(self):
         

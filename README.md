@@ -19,13 +19,19 @@ Work in progress:
 - [ ] Design, train and evaluate neural networks
   - [x] Readmission labels
   - [ ] Readmission time delta
-  - [ ] Mortality labels
-  - [ ] Mortality time delta
+  - [x] Mortality labels
+  - [x] Mortality time delta
 
 Neural networks:
 - Readmission labels:
   - Accuracy: 85%
   - Loss: 0.34 
-
+- Mortality labels:
+  - Accuracy: 87%
+  - Loss: 0.31
+- Mortality time delta:
+  - R2 score: 0.19% :(
+  - Loss: 0.55 
+  
 Due date: October 2018
 

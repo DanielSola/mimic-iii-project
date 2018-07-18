@@ -32,17 +32,28 @@ class PatientOutcomes():
         
         return query_database(MORTALITY_TIME_QUERY);
     
-    def get_patient_outcomes(self):
+    def get_categorical_outcomes(self):
         
         mortality        = self._get_mortality();
-        mortality_days   = self._get_mortality_time();
         readmission     = self._get_readmissions();
+        
+        patient_outcomes_dfs = [mortality ,readmission];    
+        categorical_outcomes = reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id', how = 'outer'), patient_outcomes_dfs);
+        categorical_outcomes.set_index('hadm_id', drop = True, inplace = True);
+        return categorical_outcomes;
+    
+    def get_numerical_outcomes(self):
+        
+        mortality_days   = self._get_mortality_time();
         readmission_days = self._get_readmission_time();
         
-        patient_outcomes = [mortality, mortality_days, readmission, readmission_days];
-        
-        return reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id', how = 'outer'), patient_outcomes);
+        patient_outcomes_dfs = [mortality_days, readmission_days];    
+        numerical_outcomes = reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id', how = 'outer'), patient_outcomes_dfs);
+        numerical_outcomes.set_index('hadm_id', drop = True, inplace = True);
+        return numerical_outcomes;
 
-        
+
+
+
     
   
