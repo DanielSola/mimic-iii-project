@@ -21,6 +21,22 @@ INNER JOIN patients p
 ON a.subject_id = p.subject_id
 ```
 
+Se distribuye estadisticamente de la siguiente manera
+
+<img src="C:\mimic-iii-project\plots\Demographic_data\age_histogram.png">
+
+
+| Descriptor estadístico  | Valor (años) |
+| :---------------------: | :----------: |
+|        Recuento         |    58976     |
+|  Media aritmética (μ)   |     55.2     |
+| Desviación estándar (σ) |     27.3     |
+|      Valor mínimo       |      0       |
+|      Percentil 25%      |     43.5     |
+|      Percentil 50%      |     61.8     |
+|      Percentil 75%      |     75.9     |
+|      Valor máximo       |     91.4     |
+
 ### Sexo ###
 
 Extraemos esta variable para cada admisión hospitalaria directamente de la base de datos, sin ningún tipo de preprocesado, mediante la siguiente consulta simple. 
@@ -32,6 +48,13 @@ INNER JOIN patients p
 ON a.subject_id = p.subject_id
 
 ```
+
+Se distribuye de la siguiente manera:
+
+|         | Recuento | Proporción |
+| :-----: | :------: | :--------: |
+| Hombres |  32950   |   55.8 %   |
+| Mujeres |  26026   |   44.2 %   |
 
 ### Estado civil
 
@@ -147,6 +170,21 @@ GROUP BY hadm_id
 Esta función se ejecuta en bucle para todas las pruebas de laboratorio.
 
 En cuanto al preprocesado, descartamos aquellos valores por debajo del percentil 1% y por encima del percentil 99%, al considerarlos errores aberrantes o fallos de medicion, además de ser poco significativos. Se realiza mediante una función creada para ello, disponible en 'preprocessing service'.
+
+Tras extraer las variables y tratarlas, obtenemos el siguiente resultado:
+
+|   Prueba de laboratorio    | Medidas (x 1000) | Media aritmética (μ) | Desviación estándar (σ) | Valor mínimo | Percentil 25 % | Percentil 50% | Percentil 75% | Valor máximo | Unidad de medida |
+| :------------------------: | :--------------: | :------------------: | :---------------------: | :----------: | :------------: | :-----------: | :-----------: | :----------: | :--------------: |
+| Nitrógeno ureico en sangre |       49.9       |         24.5         |          16.1           |     5.6      |      13.4      |     19.2      |     30.3      |      93      |     mg/24hr      |
+|   Recuento de plaquetas    |       55.8       |        241.1         |          97.9           |     44.9     |     172.3      |      229      |     297.1     |    595.6     |       K/uL       |
+|        Hematocrito         |       55.9       |         33.9         |           6.9           |     23.8     |      29.1      |     31.9      |     36.7      |     58.9     |        %         |
+|     Potasio en sangre      |       51.8       |         4.2          |           0.4           |     3.3      |      3.9       |      4.1      |      4.4      |     5.8      |      mEq/L       |
+|      Sodio en sangre       |       51.8       |        138.7         |           3.1           |    128.7     |     136.9      |     138.9     |     140.8     |    147.8     |      mEq/L       |
+|    Creatinina en sangre    |       49.9       |         1.3          |           1.1           |     0.35     |      0.72      |     0.93      |     1.34      |     7.9      |      mg/dL       |
+|   Bicarbonato en sangre    |       51.8       |        138.7         |           3.1           |    128.7     |     136.9      |     138.9     |     140.8     |    147.8     |      mEq/L       |
+|   Recuento de leucocitos   |       55.8       |         241          |          97.9           |     44.9     |     172.3      |      229      |     297.1     |    595.6     |       K/uL       |
+|     Glucosa en sangre      |       49.6       |        131.7         |          32.9           |     78.2     |      110       |     124.2     |     124.3     |    144.3     |      mg/dL       |
+|     Albúmina en sangre     |       30.5       |         3.2          |           0.6           |     1.7      |      2.7       |      3.2      |      3.7      |     4.7      |       g/dL       |
 
 ## Señales fisológicas
 
