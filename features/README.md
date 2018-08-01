@@ -212,7 +212,20 @@ WHERE itemid IN (646, 220277)
 GROUP BY hadm_id
 ```
 
-Aplicamos el mismo procesamiento usado anteriormente, es decir, descartamos aquellos valores por debajo del percentil 1% y aquellos por encima del 99%. 
+Aplicamos el mismo procesamiento usado anteriormente, es decir, descartamos aquellos valores por debajo del percentil 1% y aquellos por encima del 99%. La estadísticas descriptivas del promedio de estas variables se muestra en la siguiente tabla.
+
+| Prueba de laboratorio   | Medidas (x 1000) | Media aritmética (μ) | Desviación estándar (σ) | Valor mínimo | Percentil 25 % | Percentil 50% | Percentil 75% | Valor máximo | Unidad de medida |
+| ----------------------- | ---------------- | -------------------- | ----------------------- | ------------ | -------------- | ------------- | ------------- | ------------ | ---------------- |
+| Frecuencia cardíaca     | 55.6             | 92.2                 | 22.9                    | 55.5         | 78.9           | 86.8          | 99.8          | 162          | BPM              |
+| Frecuencia respiratoria | 55.6             | 22.7                 | 10.1                    | 12.4         | 16.9           | 19.4          | 23            | 60           | BPM              |
+| Presión sistólica       | 48               | 120.5                | 15.2                    | 86.8         | 109.2          | 118.8         | 130.6         | 163.8        | mmHg             |
+| Presión diastólica      | 48               | 61                   | 9.7                     | 39.2         | 54             | 60.1          | 67.1          | 91.8         | mmHg             |
+| Temperatura             | 47.2             | 98.2                 | 0.9                     | 94.7         | 97.7           | 98.2          | 98.8          | 100.6        | ºF               |
+| Saturación de oxígeno   | 48               | 96.9                 | 1.64                    | 89.3         | 96.1           | 97.2          | 98.8          | 99.8         | %                |
+
+A continuación se muestra la distribución de densidad de estas variables.
+
+<img src="C:\mimic-iii-project\plots\Physio_data\subplot.png">
 
 ## Información hospitalaria
 
