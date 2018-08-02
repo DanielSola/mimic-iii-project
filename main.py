@@ -6,15 +6,17 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.realpath('__file__')));
 import pandas as pd
-from get_features import *
-from get_labels import *
+from features.get_features import *
+from labels.get_labels import *
 from keras.layers import Dense
 from keras.models import Sequential
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, cohen_kappa_score, roc_auc_score
-
+from services.plotting_service import *
 #Extraction of features
-features = Features().get_nn_features();
+physio = Features().Measures().get_physio_data();
+variable = physio.avg_spo2
+PlottingService().plot_kde(variable, 'Temperature', 'ºF', 'Relative Frequency (%)',1000)
 categorical_labels = PatientOutcomes().get_categorical_outcomes();
 label = pd.DataFrame(categorical_labels.mortality);
 data = pd.merge(features, label, left_index = True, right_index = True, how = 'inner').dropna();
