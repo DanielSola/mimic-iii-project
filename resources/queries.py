@@ -83,24 +83,28 @@ MORTALITY_QUERY = """
                         SELECT hadm_id,
                         CASE 
     									WHEN 
-    										dod is null
-    									THEN 'not-expired'
+                                      EXTRACT(epoch FROM (dod-dischtime))/(3600*24*30) >= 12
+         
+    									THEN '12+ months'
     							
                         	WHEN 
-                        		EXTRACT(epoch FROM (dod-dischtime))/(3600*24*30) > 6 
-                        	THEN '6+ months'
+                        		EXTRACT(epoch FROM (dod-dischtime))/(3600*24*30) < 12 AND
+    								EXTRACT(epoch FROM (dod-dischtime))/(3600*24*30) >= 1
+
+                        	THEN '1-12 months'
     									
-    									WHEN
-    										EXTRACT(epoch FROM (dod-dischtime))/(3600*24*30) < 6 AND
-    										EXTRACT(epoch FROM (dod-dischtime))/(3600*24*30) > -0.5
-    									THEN '0-6 months'	
-    									
-    									END
-    
+									WHEN
+										EXTRACT(epoch FROM (dod-dischtime))/(3600*24*30) < 1 AND
+										EXTRACT(epoch FROM (dod-dischtime))/(3600*24*30) > -0.5
+									THEN '0-1 months'	
+									
+									END
+
                         AS mortality
                         FROM admissions a
                         INNER JOIN patients p
                         ON a.subject_id = p.subject_id
+                        WHERE p.expire_flag = 1
                  """
                                  
                                 
@@ -112,7 +116,8 @@ MORTALITY_TIME_QUERY = """SELECT hadm_id, EXTRACT(epoch FROM (dod-dischtime))/(3
                             FROM admissions a
                             INNER JOIN patients p
                             ON a.subject_id = p.subject_id
-							    WHERE EXTRACT(epoch FROM (dod-dischtime))/(3600*24) > 0.5"""
+							    WHERE EXTRACT(epoch FROM (dod-dischtime))/(3600*24) > 0.5
+                            AND p.expire_flag = 1"""
 
 HOSPITAL_EXPIRE_FLAG_QUERY = """SELECT hadm_id, hospital_expire_flag
                                 FROM admissions"""

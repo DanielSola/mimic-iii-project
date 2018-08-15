@@ -12,11 +12,11 @@ import numpy as np
 
 class PatientOutcomes():
     
-    def _get_mortality(self):
+    def get_mortality(self):
         
         return query_database(MORTALITY_QUERY);
 
-    def _get_readmissions(self):
+    def get_readmissions(self):
         
         admissions_data = query_database(ADMISSION_DATA_QUERY);
         
@@ -28,7 +28,7 @@ class PatientOutcomes():
         
         return extract_readmission_time(admissions_data);
     
-    def _get_mortality_time(self):
+    def get_mortality_time(self):
         
         return query_database(MORTALITY_TIME_QUERY);
     

@@ -57,10 +57,8 @@ def group_ethnic_groups(ethnic_group_df):
     return ethnic_group_df;
 
 def convert_surgery_flag_to_category(flag):
-    if flag == 2:
+    if flag == 2 or flag == 1:
         return 'NARROW';
-    if flag == 1:
-        return 'BROAD';
     else:
         return 'NO SURGERY';
     

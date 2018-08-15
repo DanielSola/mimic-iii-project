@@ -36,9 +36,9 @@ class Features():
         procedure_count = self.ICUData()._get_procedure_count();
         severity_scores = self.ICUData()._get_severity_scores();
         mech_vent_time = self.ICUData()._get_mechanical_ventilation_time();
-        hospital_expire_flag = self.ICUData()._get_hospital_expire_flag();
+        ##hospital_expire_flag = self.ICUData()._get_hospital_expire_flag();
 
-        numerical_features_dfs = [ age, measures, icu_los, total_los, previous_admission_count, procedure_count, severity_scores, mech_vent_time, hospital_expire_flag ];     
+        numerical_features_dfs = [ age, measures, icu_los, total_los, previous_admission_count, procedure_count, severity_scores, mech_vent_time ];     
         numerical_features = reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id', how = 'outer'), numerical_features_dfs);
                 
         numerical_features['total_mech_vent_time'].fillna(0, inplace = True);
