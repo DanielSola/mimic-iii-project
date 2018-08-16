@@ -1,4 +1,4 @@
-# Red Neuronal Artificial
+Red Neuronal Artificial
 
 Con el fin de diseñar un modelo predictivo para la mortalidad y readmisión, diseñamos una red neuronal. Para ello, se utiliza la librería Keras, escrita en Python. 
 
@@ -113,7 +113,62 @@ Se decide destinar el 7.5% del conjunto de datos a la evaluación del modelo, di
 
 Se realiza facilmente mediante la utilizad 'train_test_split' de la librería 'Scikit Learn'
 
-## Selección de parametros
+## Métricas de evaluación
 
-*** A continuar ***
+El uso correcto de las métricas de evaluación en un modelo clasificatorio es indispensable para entender el rendimiento de este. 
 
+### Precisión de clasificación
+
+Se trata de la relación entre predicciones correctas y el número total de predicciones. Es útil cuando las clases a predecir se encuentran balanceadas, tal como en el caso que nos ocupa. En el caso contrario, suele inducir a errores de interpretación. Por ejemplo, en una tarea clasificatoria de imágenes del 0 al 9, si se desea construir un clasificador que detecte el número 6, basta con que el algoritmo clasifique cada registro como distinto al 6 para obtener una precisión del 90%, ya que solo el 10% de las imágenes son 6. Esta es una problemática mayor en tareas de aprendizaje automático y es por ello que deben emplearse diversas métricas para estudiar un mismo modelo. 
+$$
+Precisión = \frac{\textrm{Predicciones correctas}}{\textrm{Total de predicciones}}
+$$
+
+
+### F1 Score
+
+La precisión, la cual indica el porcentaje de predicciones correctas por el modelo, y la sensibilidad, que señala que porcentaje de registros fueron predichos correctamente.
+
+Estas dos métricas se combinan en una misma mediante el 'F-Score'. Se cálcula a partir de la media harmónica de precisión y sensibilidad, y por lo tanto, solo devolverá un valor elevado si tanto la sensibilidad como la precisión son elevadas. 
+$$
+F1 =2 · \frac{\textrm{Precisión · Sensibilidad}}{\textrm{Precisión + Sensibilidad}}
+$$
+
+### Entropia cruzada categórica
+
+También llamada pérdida logarítmica, penaliza las clasificaciones falsas. Se trata de una métrica de evaluación para modelos que predicen clases mutuamente exclusivas, como es este caso, que permite medir la diferencia entre las probabilidades predecidas y los valores reales. Durante el entrenamiento, se persigue minimizar esta diferencia. Minimizar la entropia cruzada categórica es equivalente a minimizar la probabilidad logarítmica negativa de los datos, lo cual es una medida directa de la capacidad de predicción del modelo. 
+
+Se calcula mediante la siguiente expresión, donde $y_{ij}$ indica si la clase $i$ pertenece a la clase $j$ y $p_{ij}$ indica la probabilidad de que la muestra $i$ pertenezca a la clase $j$ 
+$$
+\textrm{Pérdida Logarítmica} = \frac{1}{\textrm{N}}\sum_{i=1}^{\N} \sum_{j=1}^{M}y_{ij} * log(p_{ij})
+$$
+
+
+### Error cuadrático medio
+
+De forma similar la métrica anterior, mide el promedio de los errores al cuadrado entre los valores obtenidos y los reales. Se calcula mediante la siguiente expresión y es conveniente minimizar su valor. Sus siglas en inglés son MSE (Mean Squared Error).
+$$
+\textrm{RME} = \frac{1}{\textrm{N}}\sum_{j=1}^{\N} ·  log(p_{ij})
+$$
+
+$$
+\textrm{MSE} = \frac{1}{\textrm{N}}\sum_{j=1}^{\N}  (y_j -\bar y_j )^2
+
+$$
+
+
+
+### AUROC  (Area under Receiver Operating Characteristic)
+
+En una curva ROC (Receiver Operating Characteristic) se muestra el ratio de verdaderos positivos, la sensibilidad, en función del ratio de falsos positivos, la especificidad. Cada punto de la curva ROC representa la relacion entre sensibilidad y especificad correspondiente a un valor umbral determinado. 
+$$
+Sensibilidad =  \frac{\textrm{Verdaderos positivos + Falsos negativos}}{\textrm{Número de muestras}}
+$$
+
+$$
+Especificidad =  \frac{\textrm{Falsos positivos}}{\textrm{Falsos positivos + Verdaderos negativos}}
+$$
+
+El area bajo esta curva es una medida del grado de ajuste de un predictor en una tarea de clasificación. Mide la discriminación del modelo, es decir, la capacidad de clasificar correctamente los valores. 
+
+Se considera que un modelo tiene una capacidad de predicción perfecta cuando este valor es 1, y aleatoria cuando es 0.5.
