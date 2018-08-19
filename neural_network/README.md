@@ -1,4 +1,4 @@
-Red Neuronal Artificial
+# Red Neuronal Artificial
 
 Con el fin de diseñar un modelo predictivo para la mortalidad y readmisión, diseñamos una red neuronal. Para ello, se utiliza la librería Keras, escrita en Python. 
 
@@ -113,6 +113,12 @@ Se decide destinar el 7.5% del conjunto de datos a la evaluación del modelo, di
 
 Se realiza facilmente mediante la utilizad 'train_test_split' de la librería 'Scikit Learn'
 
+ ## Sobreajuste y sobregeneralización
+
+En determinadas ocasiones, un modelo predictivo puede ajustarse demasiado al conjunto de datos de datos de entreno, siendo incapaz de generalizar la predicción para datos con los que no ha sido entrenado. Por otra parte, también se puede dar la situación contraria, es decir, que no haya sido capaz de extraer relaciones significantes durante el proceso de entreno, y por lo tal tampoco pueda realizar predicciones correctas. 
+
+![](C:\mimic-iii-project\plots\Useful_plots\overfit.png)
+
 ## Métricas de evaluación
 
 El uso correcto de las métricas de evaluación en un modelo clasificatorio es indispensable para entender el rendimiento de este. 
@@ -153,7 +159,7 @@ $$
 
 $$
 \textrm{MSE} = \frac{1}{\textrm{N}}\sum_{j=1}^{\N}  (y_j -\bar y_j )^2
-
+
 $$
 
 
@@ -172,3 +178,30 @@ $$
 El area bajo esta curva es una medida del grado de ajuste de un predictor en una tarea de clasificación. Mide la discriminación del modelo, es decir, la capacidad de clasificar correctamente los valores. 
 
 Se considera que un modelo tiene una capacidad de predicción perfecta cuando este valor es 1, y aleatoria cuando es 0.5.
+
+## Parámetros e hiperparámetros
+
+Los hiperparámetros son las variables que determinan la estructura de la red neuronal, tal como el número de capas ocultas, y las variables que determinan como la red se entrena, por ejemplo el ratio de aprendizaje.
+
+Los hiperparámetros se establecen antes de entrenar el modelo y determinan su rendimiento. Los principales hiperparámetros a seleccionar son los siguientes: 
+
+* Número de capas ocultas y unidades: Se trata de las capas entre la capa de entrada y la capa de salida. Un número muy elevado de unidades en una misma capa junto con técnicas de regularización permite aumentar la precisión del modelo. Sin embargo, un número bajo de unidades puede llevar a la sobregeneralización del modelo.
+
+* Dropout: Es una técnica para reducir el sobreajuste en redes neuronales. Consiste en desactivar aleatoriamente un porcentaje de neuronas en cada capa, con tal de disminuir su peso alternativamente en el modelo. De esta forma, la red aumenta su capacidad de generalizar los resultados. 
+
+  ![](C:\mimic-iii-project\plots\Useful_plots\dropout.png)
+
+* Función de activación: Se emplean para introducir no-linearidades en el modelo, lo cual permite al modelo de aprendizaje automático diseñar fronteras de predicción no lineares. Se suele emplear generalmente la función de rectificación de activación (ReLu). La función sigmoide es empleada en la capa de salida en modelos predictivos binarios, mientras que la capa 'Softmax' se emplea en modelos predictivos multiclase. 
+
+![](C:\mimic-iii-project\plots\Useful_plots\sigmoid.png)
+
+* Ratio de aprendizaje: Determina la velocidad de actualización de parámetros de una red. Un ratio de aprendizaje bajo alentece el proceso de aprendizaje, pero converge adecuadamente. Sin embargo, un ratio de aprendizaje alto acelera el entreno de la red, pero puede no lleger a los parámetros óptimos. Es por esto que se suelen emplear ratios de aprendizaje adaptativo, es decir, elevados al inicio del entreno de la red y lento una vez se acerca la convergencia. 
+
+* Momento: Permite deducir la dirección del siguiente paso hacia la convergencia de la red a partir de los pasos anteriores, evitando así oscilaciones. 
+
+* Epochs: Es la cantidad de veces que el conjunto de datos de entrenamiento es proporiconado a la red durante el entreno. 
+* Batch Size: Es el número de muestras del conjunto de entreno tras el cual se actualizan los parámetros de la red. 
+
+## Ajuste de parámetros e hiperparámetros
+
+La elección de los parámetros óptimos de una red neuronal es un proceso costoso computacionalmente que puede se e

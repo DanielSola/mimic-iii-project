@@ -9,8 +9,6 @@ from sklearn.model_selection import train_test_split
 
 def get_nn_data():
     
-    X_train_mortality, X_test_mortality, Y_train_mortality, Y_test_mortality = train_test_split(mortality_features, hot_encoded_mortality, test_size=0.075, random_state=42);
-
     #Extraction, filtering and preparation of numerical features
     numerical_features = Features().get_numerical_features();
     filtered_numerical_features = numerical_features.query('age > 18 & age < 95');
