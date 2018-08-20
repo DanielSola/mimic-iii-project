@@ -199,13 +199,82 @@ Los hiperparámetros se establecen antes de entrenar el modelo y determinan su r
 ![](C:\mimic-iii-project\plots\Useful_plots\sigmoid.png)
 
 * Ratio de aprendizaje: Determina la velocidad de actualización de parámetros de una red. Un ratio de aprendizaje bajo alentece el proceso de aprendizaje, pero converge adecuadamente. Sin embargo, un ratio de aprendizaje alto acelera el entreno de la red, pero puede no lleger a los parámetros óptimos. Es por esto que se suelen emplear ratios de aprendizaje adaptativo, es decir, elevados al inicio del entreno de la red y lento una vez se acerca la convergencia. 
-
 * Momento: Permite deducir la dirección del siguiente paso hacia la convergencia de la red a partir de los pasos anteriores, evitando así oscilaciones. 
-
 * Epochs: Es la cantidad de veces que el conjunto de datos de entrenamiento es proporiconado a la red durante el entreno. 
 * Batch Size: Es el número de muestras del conjunto de entreno tras el cual se actualizan los parámetros de la red. 
+* Optimizer:
 
 ## Ajuste de parámetros e hiperparámetros
 
-La elección de los parámetros óptimos de una red neuronal es un proceso esencial en la obtención de un buen modelo predictivo. Se trata de un proceso iterativo, donde se itera sobre un mismo parámetro, dejando fijos los demás, para así obtener el mejor valor para este. 
+La elección de los parámetros óptimos de una red neuronal es un proceso esencial en la obtención de un buen modelo predictivo. Existen diversos enfoques para encontrar estos valores.
 
+* Grid Search: Consiste en probar todas las combinaciones posibles de parámetros hasta dar con aquella que minimiza la métrica de evaluación empleada. Es un método poco óptimo, únicamente útil en modelos sencillos y rápidos de compilar, ya que en el caso contrario requiere demasiado tiempo y recursos computacionales. 
+* Búsqueda aleatoria: Se trata de probar aleatoriamente combinaciones de hiperparámetros hasta dar con alguna que devuelva un resultado adecuado. No garantiza encontrar los hiperparámetros óptimos.
+
+* Búsqueda informada: Se buscan los hiperparámetros óptimos evaluando tras cada iteraciones el resultado obtenido. Tras cada iteracion, se decrece la probabilidad de escoger valores que no corresponden a la solucion óptima. De esta forma, se escoge un nuevo conjunto de parámetros, se observa si se ha aumentado o disminuido la calidad del modelo, y acorde a esto, se escoge un nuevo conjunto de parámetros en función de los anteriores. De esta manera, se optimiza la búsqueda de parámetros, ya que cada paso de cálculo se aproxima cada vez a los parámetros óptimos, además de no ser necesario evaluar todas las combinaciones de parámetros posibles. 
+
+### Optimización Bayesiana
+
+Se realiza el ajuste de parámetros mediante la opción de búsqueda informada, en concreto, emplearemos la optimización Bayesiana. 
+
+Es un enfoque basado en modelos probabilísticos para encontrar el mínimo de una función que devuelve una métrica real. En este caso, la función es multidimensional, ya que recibe como entrada un espacio de hiperparámetros. La óptimización Bayesiana reduce el número de veces que debemos entrenar y evaluar la red neuronal, proceso computacionalmente costoso. Se construye yn modelo probabilístico de la función objetivo que busca la correspondencia entre los valores de entrada, en este caso los hiperparámetors, y la salida, la métrica de evaluación. De esta manera, se recalcula la selección de hiperparámetros basandose en la nueva evidencia encontrada tras cada iteracion.
+
+Para la implementación de este método utilizamos la librería Hyperopt. [https://github.com/hyperopt/hyperopt].
+
+Primeramente diseñamos una función que permite entrenar la red neuronal partir de los parámetros de entrada y devuelve una métrica de evaluación, el AUROC, definido anteriormente. En este caso, como el método de optimización Bayesiana busca minimizar la función coste, se devuelve 1 - AUROC.
+
+``` python
+def train_neural_network(X_train, Y_train, X_test, Y_test, params):
+    
+    n_layers = params['n_layers'];
+    n_neurons = params['n_neurons'];
+    batch_size = params['batch_size'];
+    epochs = params['epochs'];
+    optimizer = params['optimizer'];
+    
+    model = Sequential();
+    for i in range(n_layers):
+        model.add(Dense(n_neurons, activation='relu', input_shape=(101,)))
+    model.add(Dense(3, activation='softmax'));
+    model.compile(loss='binary_crossentropy',
+                  optimizer=optimizer,
+                  metrics=['accuracy', 'mse'])
+
+    model.fit(X_train, Y_train,epochs=epochs, batch_size=batch_size, verbose=0);
+    
+    Y_pred = model.predict(X_test);
+    roc_auroc = roc_auc_score(Y_test, Y_pred);
+    
+    return 1 - roc_auroc;
+```
+
+Se observa que el modelo recibe como parámetros el número de capas, el número de neuronas por capa, el batch size, el número de epochs y la función de optimización. Empleamos el módulo roc_auc_score de la libreria 'Scikit-Learn' para obtener la métrica AUROC, ya que no se encuentra incluída por defecto en Keras. 
+
+Envolvemos está función en una función objetivo, que recibe únicamente los parámetros y devuelve la métrica seleccionada, para ser utilizada por Hyperopt. 
+
+``` python
+def f(params):
+    return train_neural_network(X_train, Y_train, X_test, Y_test, params);
+```
+
+Posteriormente definimos el espacio de hiperparámetros en el cual buscaremos aquellos óptimos, que maximizen el AUROC del modelo.  En concreto, se prueban los siguientes parámetros..
+
+* Número de capas: de 1 a 10.
+* Número de neuronas: 8, 16, 32, 64.
+* Funciones de optimización: 'Stochastic Gradient Descent, Adam, RMSProp, Adagrad.
+* Epochs: De 1 a 100 en saltos de 10.
+* Batch size: 100, 200, 300, 400, 500.
+
+Se utiliza el algoritmo por defecto de Hyperopt, TPE (Tree-structured Parzen Estimator), el cual explora inteligentemente el espacio de hiperparámetros reduciendo la búsqueda a aquellos óptimos tras cada iteracion. 
+
+Tras 100 iteraciones y un tiempo de ejeución de N horas, obtenemos que los parámetros que máximizan el AUROC son los siguientes:
+
+| Parámetro                   | Valor óptimo |
+| --------------------------- | ------------ |
+| Número de capas             |              |
+| Número de neuronas por capa |              |
+| Función de optimización     |              |
+| Epochs                      |              |
+| Batch Size                  |              |
+
+Con estos valores se devuelve un AUROC del ......
