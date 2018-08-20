@@ -119,6 +119,10 @@ En determinadas ocasiones, un modelo predictivo puede ajustarse demasiado al con
 
 ![](C:\mimic-iii-project\plots\Useful_plots\overfit.png)
 
+De esta manera, es necesario encontrar un modelo que no 'memorice' los datos usados durante su entrenamiento, pero que sea capaz de extraer las relaciones significativas. No siempre el modelo con mayor precisión sobre los datos de entreno es el mejor, ya que puede ser un modelo sobreajustado.  
+
+Un modelo sobregeneralizado presenta error alto tanto en los datos de entreno como en los datos de test, mientras que un modelo sobreajutado presenta error muy bajo sobre el conjunto de entreno y error alto sobre el conjunto de test. 
+
 ## Métricas de evaluación
 
 El uso correcto de las métricas de evaluación en un modelo clasificatorio es indispensable para entender el rendimiento de este. 
@@ -159,7 +163,6 @@ $$
 
 $$
 \textrm{MSE} = \frac{1}{\textrm{N}}\sum_{j=1}^{\N}  (y_j -\bar y_j )^2
-
 $$
 
 
@@ -204,4 +207,5 @@ Los hiperparámetros se establecen antes de entrenar el modelo y determinan su r
 
 ## Ajuste de parámetros e hiperparámetros
 
-La elección de los parámetros óptimos de una red neuronal es un proceso costoso computacionalmente que puede se e
+La elección de los parámetros óptimos de una red neuronal es un proceso esencial en la obtención de un buen modelo predictivo. Se trata de un proceso iterativo, donde se itera sobre un mismo parámetro, dejando fijos los demás, para así obtener el mejor valor para este. 
+
