@@ -202,7 +202,7 @@ Los hiperparámetros se establecen antes de entrenar el modelo y determinan su r
 * Momento: Permite deducir la dirección del siguiente paso hacia la convergencia de la red a partir de los pasos anteriores, evitando así oscilaciones. 
 * Epochs: Es la cantidad de veces que el conjunto de datos de entrenamiento es proporiconado a la red durante el entreno. 
 * Batch Size: Es el número de muestras del conjunto de entreno tras el cual se actualizan los parámetros de la red. 
-* Optimizer:
+* Algoritmo de optimización: Se trata del algoritmo empleado para actualizar los parámetros del modelo, principalmente los pesos y varianzas de cada neurona. 
 
 ## Ajuste de parámetros e hiperparámetros
 
@@ -259,22 +259,73 @@ def f(params):
 
 Posteriormente definimos el espacio de hiperparámetros en el cual buscaremos aquellos óptimos, que maximizen el AUROC del modelo.  En concreto, se prueban los siguientes parámetros..
 
-* Número de capas: de 1 a 10.
+* Número de capas: de 2 a 8.
 * Número de neuronas: 8, 16, 32, 64.
 * Funciones de optimización: 'Stochastic Gradient Descent, Adam, RMSProp, Adagrad.
-* Epochs: De 1 a 100 en saltos de 10.
-* Batch size: 100, 200, 300, 400, 500.
+* Epochs: 10, 25, 35
+* Batch size: 1, 25, 50
 
 Se utiliza el algoritmo por defecto de Hyperopt, TPE (Tree-structured Parzen Estimator), el cual explora inteligentemente el espacio de hiperparámetros reduciendo la búsqueda a aquellos óptimos tras cada iteracion. 
 
-Tras 100 iteraciones y un tiempo de ejeución de N horas, obtenemos que los parámetros que máximizan el AUROC son los siguientes:
+Tras 50 iteraciones y un tiempo de ejecución de 3.5 horas, obtenemos que los parámetros que máximizan el AUROC son los siguientes:
 
-| Parámetro                   | Valor óptimo |
-| --------------------------- | ------------ |
-| Número de capas             |              |
-| Número de neuronas por capa |              |
-| Función de optimización     |              |
-| Epochs                      |              |
-| Batch Size                  |              |
++ Número de capas:
++ Neuronas por capa:
++ Batch Size:
++ Epochs: 
++ Función de optimización:
 
-Con estos valores se devuelve un AUROC del ......
+Por otra parte, la configuracion que reducen el error cuadrático medio (MSE) es las siguientes:
+
+* Número de capas: 6
+* Neuronas por capa: 8
+* Batch Size: 50
+* Epoch: 25
+* Función de optimización: Adam
+
+Con estos valores, obtenemos un MSE del 0.1543. 
+
+A partir de estos valores, seleccionaremos la siguiente configuración de red neuronal:
+
+* X capas
+* Y Neuronas
+* Z epochs
+* K batch size
+* FOO función de activación
+
+## Evaluación de la red
+
+Una vez escogidos los parámetros para la red, es conveniente evaluar su rendimiento a partir de sus métricas de evaluación, además de determinar si se produce el sobreajuste a los datos de entreno.
+
+| Métrica                          | Valor |
+| -------------------------------- | ----- |
+| Precisión sobre datos de entreno | 0.656 |
+| Precisión sobre datos de test    | 0.632 |
+| Categorical Cross Entropy Loss   | 0.461 |
+| Error cuadrático medio           | 0.154 |
+| AUROC                            | 0.812 |
+
+Calculamos por separado el AUROC para cada una de las tres clases predichas y representamos sus curvas: 
+
+| Clase | Mortalidad   | AUROC |
+| ----- | ------------ | ----- |
+| 0     | < 1 mes      | 0.89  |
+| 1     | 1 - 12 meses | 0.72  |
+| 2     | > 12 meses   | 0.81  |
+
+![](C:\mimic-iii-project\plots\Evaluation\3Curvas SPA.png)
+
+A partir de estos datos, se observa que el modelo obtenido tiene muy buena capacidad discriminatoria para diferenciar aquellos pacientes de la primera clase del resto, la cual corresponde a pacientes con mortalidad estimada menor a un mes. 
+
+En cuanto a la matriz de confusión normalizada del modelo, obtenemos el siguiente resultado: 
+
+![](C:\mimic-iii-project\plots\Evaluation\matriz_confusion_normalizada_seaborn.png)
+
+De nuevo, se observa que el modelo posee dificultades para discernir pacientes en el intervalo de 1 a 12 meses, aunque no lo hace para las otras dos clases.
+
+| Clase        | Precisión | Recall | F1 Score |
+| ------------ | --------- | ------ | -------- |
+| <1 mes       | 0.79      | 0.71   | 0.75     |
+| 1 - 12 meses | 0.47      | 0.38   | 0.42     |
+| >12 meses    | 0.57      | 0.72   | 0.64     |
+
