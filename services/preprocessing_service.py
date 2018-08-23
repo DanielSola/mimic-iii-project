@@ -129,12 +129,23 @@ def extract_readmissions(admissions_data):
     total_readmissions = [];
     for index in range(admissions_data.shape[0] - 1):
         if admissions_data.ix[index].subject_id == admissions_data.ix[index + 1].subject_id:
-            if (admissions_data.ix[index + 1].admittime - admissions_data.ix[index].dischtime).days < (30 * 6):
-                readmission = '0-6 months';
-            else:
-                readmission = '6+ months';
+            
+            if (
+                (admissions_data.ix[index + 1].admittime - admissions_data.ix[index].dischtime).days < (30 * 12)
+                and 
+                (admissions_data.ix[index + 1].admittime - admissions_data.ix[index].dischtime).days > (30* 0)
+                
+            ):
+                readmission = '0-12 months';
+                
+            if (
+                (admissions_data.ix[index + 1].admittime - admissions_data.ix[index].dischtime).days < (30 * 36)
+                and 
+                (admissions_data.ix[index + 1].admittime - admissions_data.ix[index].dischtime).days >= (30 * 12)
+            ):
+                readmission = '12-36 months';               
         else:
-            readmission = 'no-readmission';
+            readmission = '36+ months';
     
         total_readmissions.append({
                     'hadm_id': admissions_data.ix[index].hadm_id, 

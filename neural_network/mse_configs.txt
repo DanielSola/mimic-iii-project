@@ -1,0 +1,424 @@
+{'batch_size': 1, 'epochs': 1, 'n_layers': 2, 'n_neurons': 16, 'optimizer': 'Adagrad'}
+0.16479920731630807
+{'batch_size': 102, 'epochs': 73, 'n_layers': 7, 'n_neurons': 64, 'optimizer': 'Adam'}
+0.23965438903262423
+{'batch_size': 383, 'epochs': 22, 'n_layers': 5, 'n_neurons': 32, 'optimizer': 'Adam'}
+0.15585484632929283
+{'batch_size': 226, 'epochs': 97, 'n_layers': 5, 'n_neurons': 128, 'optimizer': 'SGD'}
+0.1566868002496063
+{'batch_size': 90, 'epochs': 35, 'n_layers': 8, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.1562520451910064
+{'batch_size': 251, 'epochs': 4, 'n_layers': 5, 'n_neurons': 8, 'optimizer': 'Adam'}
+0.16611558438585491
+{'batch_size': 30, 'epochs': 5, 'n_layers': 7, 'n_neurons': 128, 'optimizer': 'SGD'}
+0.16182129460024905
+{'batch_size': 199, 'epochs': 22, 'n_layers': 9, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.15397230491970695
+{'batch_size': 199, 'epochs': 22, 'n_layers': 9, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.15537328326118452
+{'batch_size': 77, 'epochs': 59, 'n_layers': 9, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.16097559412438367
+{'batch_size': 394, 'epochs': 22, 'n_layers': 9, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.15456767718056189
+{'batch_size': 291, 'epochs': 91, 'n_layers': 9, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.16228552780360073
+{'batch_size': 199, 'epochs': 72, 'n_layers': 3, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.15514112367828098
+{'batch_size': 204, 'epochs': 17, 'n_layers': 9, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.15546717032215362
+{'batch_size': 208, 'epochs': 41, 'n_layers': 4, 'n_neurons': 128, 'optimizer': 'RMSprop'}
+0.2395037133191389
+{'batch_size': 63, 'epochs': 86, 'n_layers': 9, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.1532366365459623
+{'batch_size': 320, 'epochs': 56, 'n_layers': 3, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15258874577478415
+{'batch_size': 400, 'epochs': 56, 'n_layers': 3, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15442493198002835
+{'batch_size': 348, 'epochs': 16, 'n_layers': 4, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15611725033921375
+{'batch_size': 345, 'epochs': 52, 'n_layers': 3, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15413975481286601
+{'batch_size': 215, 'epochs': 58, 'n_layers': 3, 'n_neurons': 8, 'optimizer': 'Adagrad'}
+0.15433777114404063
+{'batch_size': 107, 'epochs': 82, 'n_layers': 6, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15083751672276405
+{'batch_size': 288, 'epochs': 82, 'n_layers': 6, 'n_neurons': 8, 'optimizer': 'SGD'}
+0.16566071474056923
+{'batch_size': 391, 'epochs': 68, 'n_layers': 6, 'n_neurons': 8, 'optimizer': 'Adagrad'}
+0.15606897696189428
+{'batch_size': 195, 'epochs': 93, 'n_layers': 6, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15314000833459
+{'batch_size': 433, 'epochs': 6, 'n_layers': 1, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.16267875052701117
+{'batch_size': 18, 'epochs': 85, 'n_layers': 6, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.196307601693476
+{'batch_size': 247, 'epochs': 37, 'n_layers': 3, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15443084202817356
+{'batch_size': 245, 'epochs': 49, 'n_layers': 6, 'n_neurons': 128, 'optimizer': 'Adagrad'}
+0.2557125200326789
+{'batch_size': 320, 'epochs': 15, 'n_layers': 2, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15679462338059874
+{'batch_size': 93, 'epochs': 32, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.15820135485701461
+{'batch_size': 15, 'epochs': 20, 'n_layers': 3, 'n_neurons': 8, 'optimizer': 'Adam'}
+0.15439395669306066
+{'batch_size': 250, 'epochs': 2, 'n_layers': 7, 'n_neurons': 32, 'optimizer': 'Adagrad'}
+0.16043826433600586
+{'batch_size': 169, 'epochs': 27, 'n_layers': 4, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15751303137233066
+{'batch_size': 92, 'epochs': 51, 'n_layers': 6, 'n_neurons': 64, 'optimizer': 'Adam'}
+0.2261952757304783
+{'batch_size': 341, 'epochs': 83, 'n_layers': 8, 'n_neurons': 128, 'optimizer': 'RMSprop'}
+0.25135369943758856
+{'batch_size': 483, 'epochs': 75, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'SGD'}
+0.16714703374340556
+{'batch_size': 107, 'epochs': 48, 'n_layers': 1, 'n_neurons': 8, 'optimizer': 'Adagrad'}
+0.156806030427313
+{'batch_size': 152, 'epochs': 74, 'n_layers': 3, 'n_neurons': 8, 'optimizer': 'Adam'}
+0.15586424191380113
+{'batch_size': 248, 'epochs': 64, 'n_layers': 7, 'n_neurons': 64, 'optimizer': 'RMSprop'}
+0.23304547728522948
+{'batch_size': 211, 'epochs': 18, 'n_layers': 6, 'n_neurons': 128, 'optimizer': 'RMSprop'}
+0.20272776359797232
+{'batch_size': 333, 'epochs': 34, 'n_layers': 8, 'n_neurons': 32, 'optimizer': 'SGD'}
+0.1740854795060455
+{'batch_size': 491, 'epochs': 19, 'n_layers': 5, 'n_neurons': 8, 'optimizer': 'Adam'}
+0.1589069069669933
+{'batch_size': 404, 'epochs': 55, 'n_layers': 2, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15028099005583131
+{'batch_size': 404, 'epochs': 62, 'n_layers': 2, 'n_neurons': 64, 'optimizer': 'Adagrad'}
+0.15274695753166867
+{'batch_size': 171, 'epochs': 55, 'n_layers': 2, 'n_neurons': 128, 'optimizer': 'RMSprop'}
+0.21161401866097831
+{'batch_size': 484, 'epochs': 66, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.15257591557432
+{'batch_size': 386, 'epochs': 77, 'n_layers': 4, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15415397632192787
+{'batch_size': 297, 'epochs': 25, 'n_layers': 2, 'n_neurons': 8, 'optimizer': 'Adam'}
+0.15659646781863373
+{'batch_size': 477, 'epochs': 40, 'n_layers': 2, 'n_neurons': 8, 'optimizer': 'SGD'}
+0.1797945446182783
+{'batch_size': 472, 'epochs': 69, 'n_layers': 7, 'n_neurons': 128, 'optimizer': 'RMSprop'}
+0.2356859516142384
+{'batch_size': 447, 'epochs': 31, 'n_layers': 6, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.15569851625743888
+{'batch_size': 191, 'epochs': 84, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.1664047946827348
+{'batch_size': 486, 'epochs': 65, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.15363416920253006
+{'batch_size': 438, 'epochs': 53, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.1532385940986854
+{'batch_size': 484, 'epochs': 55, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.15508176498667775
+{'batch_size': 143, 'epochs': 66, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.1689165081928321
+{'batch_size': 427, 'epochs': 76, 'n_layers': 5, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.17643969558643657
+{'batch_size': 312, 'epochs': 46, 'n_layers': 8, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.1687698103376949
+{'batch_size': 189, 'epochs': 54, 'n_layers': 1, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.15054545905717404
+{'batch_size': 183, 'epochs': 54, 'n_layers': 1, 'n_neurons': 8, 'optimizer': 'Adagrad'}
+0.15315201552225505
+{'batch_size': 234, 'epochs': 82, 'n_layers': 1, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15155204018074964
+{'batch_size': 82, 'epochs': 61, 'n_layers': 1, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.15284925467536428
+{'batch_size': 441, 'epochs': 45, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.16586849258809133
+{'batch_size': 310, 'epochs': 79, 'n_layers': 1, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15263142080795164
+{'batch_size': 181, 'epochs': 88, 'n_layers': 6, 'n_neurons': 32, 'optimizer': 'Adam'}
+0.19302420597578723
+{'batch_size': 57, 'epochs': 7, 'n_layers': 4, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.1579607428181419
+{'batch_size': 164, 'epochs': 14, 'n_layers': 9, 'n_neurons': 128, 'optimizer': 'Adagrad'}
+0.2012713025072562
+{'batch_size': 286, 'epochs': 95, 'n_layers': 6, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.16353360198725578
+{'batch_size': 107, 'epochs': 54, 'n_layers': 1, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15055970630942891
+{'batch_size': 422, 'epochs': 28, 'n_layers': 1, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.1522759628667322
+{'batch_size': 35, 'epochs': 54, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.15048216181622062
+{'batch_size': 48, 'epochs': 8, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.16054531445489084
+{'batch_size': 261, 'epochs': 90, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.15813406150489603
+{'batch_size': 35, 'epochs': 3, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.1685955984037071
+{'batch_size': 224, 'epochs': 94, 'n_layers': 5, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.15286766519709227
+{'batch_size': 494, 'epochs': 21, 'n_layers': 7, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.1957441550864664
+{'batch_size': 331, 'epochs': 36, 'n_layers': 8, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.17256341835688413
+{'batch_size': 11, 'epochs': 9, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.15363132796230938
+{'batch_size': 403, 'epochs': 23, 'n_layers': 4, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.17516157703159116
+{'batch_size': 189, 'epochs': 43, 'n_layers': 9, 'n_neurons': 128, 'optimizer': 'Adam'}
+0.23356332291658272
+{'batch_size': 499, 'epochs': 13, 'n_layers': 1, 'n_neurons': 32, 'optimizer': 'Adagrad'}
+0.15640478227011173
+{'batch_size': 404, 'epochs': 47, 'n_layers': 5, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.1660655037143464
+{'batch_size': 481, 'epochs': 70, 'n_layers': 7, 'n_neurons': 16, 'optimizer': 'SGD'}
+0.17427879984018002
+{'batch_size': 378, 'epochs': 60, 'n_layers': 1, 'n_neurons': 32, 'optimizer': 'Adagrad'}
+0.15070741432180038
+{'batch_size': 69, 'epochs': 39, 'n_layers': 8, 'n_neurons': 64, 'optimizer': 'Adam'}
+0.21118938597444256
+{'batch_size': 41, 'epochs': 33, 'n_layers': 3, 'n_neurons': 128, 'optimizer': 'SGD'}
+0.15355915325508626
+{'batch_size': 168, 'epochs': 38, 'n_layers': 4, 'n_neurons': 32, 'optimizer': 'Adam'}
+0.16480820214801442
+{'batch_size': 293, 'epochs': 92, 'n_layers': 1, 'n_neurons': 16, 'optimizer': 'SGD'}
+0.16335232389609963
+{'batch_size': 31, 'epochs': 89, 'n_layers': 9, 'n_neurons': 64, 'optimizer': 'Adagrad'}
+0.2494470277596652
+{'batch_size': 495, 'epochs': 54, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'SGD'}
+0.16810303985718802
+{'batch_size': 206, 'epochs': 98, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'RMSprop'}
+0.16622994581917272
+{'batch_size': 311, 'epochs': 57, 'n_layers': 7, 'n_neurons': 128, 'optimizer': 'Adam'}
+0.24846044750524912
+{'batch_size': 458, 'epochs': 67, 'n_layers': 5, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.16370827455725798
+{'batch_size': 157, 'epochs': 10, 'n_layers': 3, 'n_neurons': 16, 'optimizer': 'SGD'}
+0.18916702036157207
+{'batch_size': 363, 'epochs': 26, 'n_layers': 2, 'n_neurons': 8, 'optimizer': 'Adagrad'}
+0.15876160169390613
+{'batch_size': 362, 'epochs': 42, 'n_layers': 8, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.16150630809786765
+{'batch_size': 492, 'epochs': 81, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'RMSprop'}
+0.15757645962853814
+{'batch_size': 271, 'epochs': 80, 'n_layers': 4, 'n_neurons': 8, 'optimizer': 'SGD'}
+0.17115425760208322
+{'batch_size': 124, 'epochs': 96, 'n_layers': 9, 'n_neurons': 128, 'optimizer': 'RMSprop'}
+0.2508167737669336
+{'batch_size': 219, 'epochs': 50, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'Adam'}
+0.15505068961873605
+{'batch_size': 410, 'epochs': 73, 'n_layers': 1, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.1527129367303424
+{'batch_size': 110, 'epochs': 29, 'n_layers': 1, 'n_neurons': 8, 'optimizer': 'Adagrad'}
+0.1581918262409527
+{'batch_size': 385, 'epochs': 71, 'n_layers': 7, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.16390715099053144
+{'batch_size': 230, 'epochs': 99, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.16296688829402187
+{'batch_size': 17, 'epochs': 78, 'n_layers': 5, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.16029873038877013
+{'batch_size': 1, 'epochs': 1, 'n_layers': 2, 'n_neurons': 16, 'optimizer': 'Adagrad'}
+0.16479920731630807
+{'batch_size': 102, 'epochs': 73, 'n_layers': 7, 'n_neurons': 64, 'optimizer': 'Adam'}
+0.23965438903262423
+{'batch_size': 383, 'epochs': 22, 'n_layers': 5, 'n_neurons': 32, 'optimizer': 'Adam'}
+0.15585484632929283
+{'batch_size': 226, 'epochs': 97, 'n_layers': 5, 'n_neurons': 128, 'optimizer': 'SGD'}
+0.1566868002496063
+{'batch_size': 90, 'epochs': 35, 'n_layers': 8, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.1562520451910064
+{'batch_size': 251, 'epochs': 4, 'n_layers': 5, 'n_neurons': 8, 'optimizer': 'Adam'}
+0.16611558438585491
+{'batch_size': 30, 'epochs': 5, 'n_layers': 7, 'n_neurons': 128, 'optimizer': 'SGD'}
+0.16182129460024905
+{'batch_size': 199, 'epochs': 22, 'n_layers': 9, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.15397230491970695
+{'batch_size': 199, 'epochs': 22, 'n_layers': 9, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.15537328326118452
+{'batch_size': 77, 'epochs': 59, 'n_layers': 9, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.16097559412438367
+{'batch_size': 394, 'epochs': 22, 'n_layers': 9, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.15456767718056189
+{'batch_size': 291, 'epochs': 91, 'n_layers': 9, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.16228552780360073
+{'batch_size': 199, 'epochs': 72, 'n_layers': 3, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.15514112367828098
+{'batch_size': 204, 'epochs': 17, 'n_layers': 9, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.15546717032215362
+{'batch_size': 208, 'epochs': 41, 'n_layers': 4, 'n_neurons': 128, 'optimizer': 'RMSprop'}
+0.2395037133191389
+{'batch_size': 63, 'epochs': 86, 'n_layers': 9, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.1532366365459623
+{'batch_size': 320, 'epochs': 56, 'n_layers': 3, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15258874577478415
+{'batch_size': 400, 'epochs': 56, 'n_layers': 3, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15442493198002835
+{'batch_size': 348, 'epochs': 16, 'n_layers': 4, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15611725033921375
+{'batch_size': 345, 'epochs': 52, 'n_layers': 3, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15413975481286601
+{'batch_size': 215, 'epochs': 58, 'n_layers': 3, 'n_neurons': 8, 'optimizer': 'Adagrad'}
+0.15433777114404063
+{'batch_size': 107, 'epochs': 82, 'n_layers': 6, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15083751672276405
+{'batch_size': 288, 'epochs': 82, 'n_layers': 6, 'n_neurons': 8, 'optimizer': 'SGD'}
+0.16566071474056923
+{'batch_size': 391, 'epochs': 68, 'n_layers': 6, 'n_neurons': 8, 'optimizer': 'Adagrad'}
+0.15606897696189428
+{'batch_size': 195, 'epochs': 93, 'n_layers': 6, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15314000833459
+{'batch_size': 433, 'epochs': 6, 'n_layers': 1, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.16267875052701117
+{'batch_size': 18, 'epochs': 85, 'n_layers': 6, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.196307601693476
+{'batch_size': 247, 'epochs': 37, 'n_layers': 3, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15443084202817356
+{'batch_size': 245, 'epochs': 49, 'n_layers': 6, 'n_neurons': 128, 'optimizer': 'Adagrad'}
+0.2557125200326789
+{'batch_size': 320, 'epochs': 15, 'n_layers': 2, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15679462338059874
+{'batch_size': 93, 'epochs': 32, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.15820135485701461
+{'batch_size': 15, 'epochs': 20, 'n_layers': 3, 'n_neurons': 8, 'optimizer': 'Adam'}
+0.15439395669306066
+{'batch_size': 250, 'epochs': 2, 'n_layers': 7, 'n_neurons': 32, 'optimizer': 'Adagrad'}
+0.16043826433600586
+{'batch_size': 169, 'epochs': 27, 'n_layers': 4, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15751303137233066
+{'batch_size': 92, 'epochs': 51, 'n_layers': 6, 'n_neurons': 64, 'optimizer': 'Adam'}
+0.2261952757304783
+{'batch_size': 341, 'epochs': 83, 'n_layers': 8, 'n_neurons': 128, 'optimizer': 'RMSprop'}
+0.25135369943758856
+{'batch_size': 483, 'epochs': 75, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'SGD'}
+0.16714703374340556
+{'batch_size': 107, 'epochs': 48, 'n_layers': 1, 'n_neurons': 8, 'optimizer': 'Adagrad'}
+0.156806030427313
+{'batch_size': 152, 'epochs': 74, 'n_layers': 3, 'n_neurons': 8, 'optimizer': 'Adam'}
+0.15586424191380113
+{'batch_size': 248, 'epochs': 64, 'n_layers': 7, 'n_neurons': 64, 'optimizer': 'RMSprop'}
+0.23304547728522948
+{'batch_size': 211, 'epochs': 18, 'n_layers': 6, 'n_neurons': 128, 'optimizer': 'RMSprop'}
+0.20272776359797232
+{'batch_size': 333, 'epochs': 34, 'n_layers': 8, 'n_neurons': 32, 'optimizer': 'SGD'}
+0.1740854795060455
+{'batch_size': 491, 'epochs': 19, 'n_layers': 5, 'n_neurons': 8, 'optimizer': 'Adam'}
+0.1589069069669933
+{'batch_size': 404, 'epochs': 55, 'n_layers': 2, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15028099005583131
+{'batch_size': 404, 'epochs': 62, 'n_layers': 2, 'n_neurons': 64, 'optimizer': 'Adagrad'}
+0.15274695753166867
+{'batch_size': 171, 'epochs': 55, 'n_layers': 2, 'n_neurons': 128, 'optimizer': 'RMSprop'}
+0.21161401866097831
+{'batch_size': 484, 'epochs': 66, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.15257591557432
+{'batch_size': 386, 'epochs': 77, 'n_layers': 4, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15415397632192787
+{'batch_size': 297, 'epochs': 25, 'n_layers': 2, 'n_neurons': 8, 'optimizer': 'Adam'}
+0.15659646781863373
+{'batch_size': 477, 'epochs': 40, 'n_layers': 2, 'n_neurons': 8, 'optimizer': 'SGD'}
+0.1797945446182783
+{'batch_size': 472, 'epochs': 69, 'n_layers': 7, 'n_neurons': 128, 'optimizer': 'RMSprop'}
+0.2356859516142384
+{'batch_size': 447, 'epochs': 31, 'n_layers': 6, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.15569851625743888
+{'batch_size': 191, 'epochs': 84, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.1664047946827348
+{'batch_size': 486, 'epochs': 65, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.15363416920253006
+{'batch_size': 438, 'epochs': 53, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.1532385940986854
+{'batch_size': 484, 'epochs': 55, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.15508176498667775
+{'batch_size': 143, 'epochs': 66, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.1689165081928321
+{'batch_size': 427, 'epochs': 76, 'n_layers': 5, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.17643969558643657
+{'batch_size': 312, 'epochs': 46, 'n_layers': 8, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.1687698103376949
+{'batch_size': 189, 'epochs': 54, 'n_layers': 1, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.15054545905717404
+{'batch_size': 183, 'epochs': 54, 'n_layers': 1, 'n_neurons': 8, 'optimizer': 'Adagrad'}
+0.15315201552225505
+{'batch_size': 234, 'epochs': 82, 'n_layers': 1, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15155204018074964
+{'batch_size': 82, 'epochs': 61, 'n_layers': 1, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.15284925467536428
+{'batch_size': 441, 'epochs': 45, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.16586849258809133
+{'batch_size': 310, 'epochs': 79, 'n_layers': 1, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15263142080795164
+{'batch_size': 181, 'epochs': 88, 'n_layers': 6, 'n_neurons': 32, 'optimizer': 'Adam'}
+0.19302420597578723
+{'batch_size': 57, 'epochs': 7, 'n_layers': 4, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.1579607428181419
+{'batch_size': 164, 'epochs': 14, 'n_layers': 9, 'n_neurons': 128, 'optimizer': 'Adagrad'}
+0.2012713025072562
+{'batch_size': 286, 'epochs': 95, 'n_layers': 6, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.16353360198725578
+{'batch_size': 107, 'epochs': 54, 'n_layers': 1, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.15055970630942891
+{'batch_size': 422, 'epochs': 28, 'n_layers': 1, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.1522759628667322
+{'batch_size': 35, 'epochs': 54, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.15048216181622062
+{'batch_size': 48, 'epochs': 8, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.16054531445489084
+{'batch_size': 261, 'epochs': 90, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.15813406150489603
+{'batch_size': 35, 'epochs': 3, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.1685955984037071
+{'batch_size': 224, 'epochs': 94, 'n_layers': 5, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.15286766519709227
+{'batch_size': 494, 'epochs': 21, 'n_layers': 7, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.1957441550864664
+{'batch_size': 331, 'epochs': 36, 'n_layers': 8, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.17256341835688413
+{'batch_size': 11, 'epochs': 9, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.15363132796230938
+{'batch_size': 403, 'epochs': 23, 'n_layers': 4, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.17516157703159116
+{'batch_size': 189, 'epochs': 43, 'n_layers': 9, 'n_neurons': 128, 'optimizer': 'Adam'}
+0.23356332291658272
+{'batch_size': 499, 'epochs': 13, 'n_layers': 1, 'n_neurons': 32, 'optimizer': 'Adagrad'}
+0.15640478227011173
+{'batch_size': 404, 'epochs': 47, 'n_layers': 5, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.1660655037143464
+{'batch_size': 481, 'epochs': 70, 'n_layers': 7, 'n_neurons': 16, 'optimizer': 'SGD'}
+0.17427879984018002
+{'batch_size': 378, 'epochs': 60, 'n_layers': 1, 'n_neurons': 32, 'optimizer': 'Adagrad'}
+0.15070741432180038
+{'batch_size': 69, 'epochs': 39, 'n_layers': 8, 'n_neurons': 64, 'optimizer': 'Adam'}
+0.21118938597444256
+{'batch_size': 41, 'epochs': 33, 'n_layers': 3, 'n_neurons': 128, 'optimizer': 'SGD'}
+0.15355915325508626
+{'batch_size': 168, 'epochs': 38, 'n_layers': 4, 'n_neurons': 32, 'optimizer': 'Adam'}
+0.16480820214801442
+{'batch_size': 293, 'epochs': 92, 'n_layers': 1, 'n_neurons': 16, 'optimizer': 'SGD'}
+0.16335232389609963
+{'batch_size': 31, 'epochs': 89, 'n_layers': 9, 'n_neurons': 64, 'optimizer': 'Adagrad'}
+0.2494470277596652
+{'batch_size': 495, 'epochs': 54, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'SGD'}
+0.16810303985718802
+{'batch_size': 206, 'epochs': 98, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'RMSprop'}
+0.16622994581917272
+{'batch_size': 311, 'epochs': 57, 'n_layers': 7, 'n_neurons': 128, 'optimizer': 'Adam'}
+0.24846044750524912
+{'batch_size': 458, 'epochs': 67, 'n_layers': 5, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.16370827455725798
+{'batch_size': 157, 'epochs': 10, 'n_layers': 3, 'n_neurons': 16, 'optimizer': 'SGD'}
+0.18916702036157207
+{'batch_size': 363, 'epochs': 26, 'n_layers': 2, 'n_neurons': 8, 'optimizer': 'Adagrad'}
+0.15876160169390613
+{'batch_size': 362, 'epochs': 42, 'n_layers': 8, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.16150630809786765
+{'batch_size': 492, 'epochs': 81, 'n_layers': 1, 'n_neurons': 64, 'optimizer': 'RMSprop'}
+0.15757645962853814
+{'batch_size': 271, 'epochs': 80, 'n_layers': 4, 'n_neurons': 8, 'optimizer': 'SGD'}
+0.17115425760208322
+{'batch_size': 124, 'epochs': 96, 'n_layers': 9, 'n_neurons': 128, 'optimizer': 'RMSprop'}
+0.2508167737669336
+{'batch_size': 219, 'epochs': 50, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'Adam'}
+0.15505068961873605
+{'batch_size': 410, 'epochs': 73, 'n_layers': 1, 'n_neurons': 16, 'optimizer': 'RMSprop'}
+0.1527129367303424
+{'batch_size': 110, 'epochs': 29, 'n_layers': 1, 'n_neurons': 8, 'optimizer': 'Adagrad'}
+0.1581918262409527
+{'batch_size': 385, 'epochs': 71, 'n_layers': 7, 'n_neurons': 64, 'optimizer': 'SGD'}
+0.16390715099053144
+{'batch_size': 230, 'epochs': 99, 'n_layers': 2, 'n_neurons': 32, 'optimizer': 'RMSprop'}
+0.16296688829402187
+{'batch_size': 17, 'epochs': 78, 'n_layers': 5, 'n_neurons': 8, 'optimizer': 'RMSprop'}
+0.16029873038877013

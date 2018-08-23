@@ -2,11 +2,11 @@
 
 Undergraduate Project for Biomedical Engineering degree @ UPC Barcelona
 
-Prediction of patient outcomes using Deep Learning
-* Readmission risk
-* Mortality
+Prediction of extra-hospital mortality in critic patients using artificial neural networks. 
 
-MIMIC III v1.4 analysis
+Designed using Keras in Python 3.6 Anaconda. 
+
+MIMIC III v1.4 database analysis
 
 Work in progress: 
 
@@ -15,23 +15,18 @@ Work in progress:
 - [x] Create queries to extract data
 - [x] Preprocess mimic data
 - [x] Explore and plot features and relationships
-- [x] Prepare data to neural networks
-- [ ] Design, train and evaluate neural networks
-  - [x] Readmission labels
-  - [ ] Readmission time delta
-  - [x] Mortality labels
-  - [x] Mortality time delta
+- [x] Prepare data to neural network
+- [x] Train and evaluate neural networks
+- [x] Optimize hyperparameters+
+- [x] Evaluate predictive model
 
-Neural networks:
-- Readmission labels:
-  - Accuracy: 85%
-  - Loss: 0.34 
-- Mortality labels:
-  - Accuracy: 87%
-  - Loss: 0.31
-- Mortality time delta:
-  - R2 score: 0.19% :(
-  - Loss: 0.55 
-  
+Result: Created neural network able to classify critical patients mortality in three groups with overall 0.82 AUROC
+
+* < 1 month mortality: 0.89 AUROC, 0.79 accuracy
+* 1 - 12 months mortality: 0.72 AUROC, 0.47 accuracy
+* \> 1 month mortality: 0.81 AUROC, 0.57 accuracy
+
+README's and documentation written in Spanish. 
+
 Due date: October 2018
 

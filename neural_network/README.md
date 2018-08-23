@@ -1,6 +1,6 @@
-# Red Neuronal Artificial
+# Modelo Predictivo
 
-Con el fin de diseñar un modelo predictivo para la mortalidad y readmisión, diseñamos una red neuronal. Para ello, se utiliza la librería Keras, escrita en Python. 
+Con el fin de diseñar un modelo predictivo para la mortalidad extrahospitalaria, diseñamos una red neuronal. Para ello, se utiliza la librería Keras, escrita en Python. 
 
 Se trata de una librería de código abierto escrita en Python capaz de ejecutarse sobre Tensorflow y Theano, principales librerías en cuanto a aprendizaje automático y redes neuronales; ofreciendo una API de alto nivel, modular y extensible.
 
@@ -8,11 +8,9 @@ Incluye numerosas implementaciones de objetos usados comunmente en la construcci
 
 Keras fue inicialmente desarrollado por François Chollet, ingeniero de Google, como parte de la investigación para el proyecto ONEIROS (Open-ended Neuro-Electronic Intelligent Robot Operating System) en 2016.
 
-![1534328450765](C:\Users\Daniel\AppData\Local\Temp\1534328450765.png)
-
 ## Preparación de datos
 
-Para obtener un rendmiento óptimo de la red neuronal, los datos de entrada deben ser tratados.
+Para obtener un rendmiento óptimo de la red neuronal, los datos de entrada deben ser tratados. Principalmente, deben tratarse los datos faltantes, normalizar las variables numéricas para que se encuentren en rangos similares, y deconstruir las variables categóricas en variables binarias para cada una de sus clases. 
 
 ### Imputación de valores faltantes (MICE)
 
@@ -105,11 +103,11 @@ Es conveniente dividir el conjunto de datos en dos conjuntos, un primer conjunto
 
 Se decide destinar el 7.5% del conjunto de datos a la evaluación del modelo, distribuyendose de la siguiente manera los conjuntos de datos de mortalidad y readmisión:
 
-|                           |   Mortalidad    | Readmisión |
-| :------------------------ | :-------------: | :--------: |
-| Conjunto de entrenamiento | 20778 registros |    ---     |
-| Conjunto de evaluación    | 1685 registros  |    ---     |
-| Total                     | 22463 registros |    ---     |
+|                           |   Mortalidad    |
+| :------------------------ | :-------------: |
+| Conjunto de entrenamiento | 20778 registros |
+| Conjunto de evaluación    | 1685 registros  |
+| Total                     | 22463 registros |
 
 Se realiza facilmente mediante la utilizad 'train_test_split' de la librería 'Scikit Learn'
 
@@ -122,6 +120,8 @@ En determinadas ocasiones, un modelo predictivo puede ajustarse demasiado al con
 De esta manera, es necesario encontrar un modelo que no 'memorice' los datos usados durante su entrenamiento, pero que sea capaz de extraer las relaciones significativas. No siempre el modelo con mayor precisión sobre los datos de entreno es el mejor, ya que puede ser un modelo sobreajustado.  
 
 Un modelo sobregeneralizado presenta error alto tanto en los datos de entreno como en los datos de test, mientras que un modelo sobreajutado presenta error muy bajo sobre el conjunto de entreno y error alto sobre el conjunto de test. 
+
+Será necesario evaluar este factor tras entrenar la red neuronal. 
 
 ## Métricas de evaluación
 
@@ -269,29 +269,33 @@ Se utiliza el algoritmo por defecto de Hyperopt, TPE (Tree-structured Parzen Est
 
 Tras 50 iteraciones y un tiempo de ejecución de 3.5 horas, obtenemos que los parámetros que máximizan el AUROC son los siguientes:
 
-+ Número de capas:
-+ Neuronas por capa:
-+ Batch Size:
-+ Epochs: 
-+ Función de optimización:
++ Número de capas: 6
++ Neuronas por capa: 8
++ Batch Size: 50
++ Epoch: 25
++ Función de optimización: Adam
 
-Por otra parte, la configuracion que reducen el error cuadrático medio (MSE) es las siguientes:
+## Arquitectura y parámetros escogidos
 
-* Número de capas: 6
-* Neuronas por capa: 8
-* Batch Size: 50
-* Epoch: 25
-* Función de optimización: Adam
+Empleando los parámetros obtenidos anteriormente mediante optimización bayesiana, obtenemos la siguiente arquitectura de red, consistente en seis capas totalmente conectadas con 16 neuronas por capa. La capa de entrada es un vector de 101 elementos, tantos como variables de entrada tras su procesado, aunque para representarlo visualmente se muestra como un único nodo. 
 
-Con estos valores, obtenemos un MSE del 0.1543. 
+![](C:\mimic-iii-project\plots\Useful_plots\architecture.svg)
 
-A partir de estos valores, seleccionaremos la siguiente configuración de red neuronal:
+Una vez entrenada y evaluada la red, se juzgará la necesidad de añadir capas Dropout para regular el sobreajuste, si lo hubiera. 
 
-* X capas
-* Y Neuronas
-* Z epochs
-* K batch size
-* FOO función de activación
+Se utiliza la función activación 'ReLU' , Rectified Linear Unit. Esta función evita el problema de los gradientes desvanecientes. La red neuronal calcula los pesos de los parámetros a partir de la diferencia en la salida del modelo en función de estos. Ciertas funciones de activación comprimen el resultado en un rango determinado, por ejemplo [-1, 1 ] en el caso de la tangente hiperbólica. De esta forma, al entrenar los parámetros de las primeras capas de la red mediante propagación hacia atrás, la convergencia de los parámetros de estas capas se hace muy lenta, debido a que los cambios de parámetros producen efectos negligibles sobre la salida de la red. 
+
+La función de activación ReLu evita este problema, ya que no restringe la salida de la capa a un rango determinado, sinó que permite valores en el intervalo [0, ∞].
+
+Tambíen reduce la carga computacional en función a otras funciones, ya que su cálculo es sencillo e inmediato, sin requerir funciones trigonométricas o exponenciales. Esto permite entrenar la red más rápido. 
+
+![](C:\mimic-iii-project\plots\Useful_plots\relu.png)
+
+En cuanto al algoritmo de optimización, utilizaremos la función 'Adam', basado en la adaptación estimada del momento. Fue presentado en 2015 por investigadores de la Universidad de Toronto. El método computa el ratio de aprendizaje de la red de forma adaptativa para diferentes parámetros a partir de estimaciones del primer y segundo momento de los gradientes. Combina las ventajas de otras  extensiones del método clásico, el algoritmo Stochastic Gradient Descent. Los resultados empíricos muestran que Adam funciona correctamente en la práctica y se compara favorablemente con otros métodos estocásticos de optimización.
+
+![](C:\mimic-iii-project\plots\Useful_plots\optomization_algorithms.png)
+
+Por otra parte, haremos 25 pasadas del conjunto de datos durante el entreno de la red neuronal y actualizaremos los parámetros cada 50 muestras, empleando los valores óptimos de epoch y batch size obtenidos en el paso anterior.
 
 ## Evaluación de la red
 
@@ -305,6 +309,8 @@ Una vez escogidos los parámetros para la red, es conveniente evaluar su rendimi
 | Error cuadrático medio           | 0.154 |
 | AUROC                            | 0.812 |
 
+Observamos que la red no produce ni sobreajuste ni sobregeneralización, ya que como es correcto, la precisión sobre los datos de entreno es ligeramente mayor a la precisión sobre los datos de evaluación.
+
 Calculamos por separado el AUROC para cada una de las tres clases predichas y representamos sus curvas: 
 
 | Clase | Mortalidad   | AUROC |
@@ -315,13 +321,15 @@ Calculamos por separado el AUROC para cada una de las tres clases predichas y re
 
 ![](C:\mimic-iii-project\plots\Evaluation\3Curvas SPA.png)
 
-A partir de estos datos, se observa que el modelo obtenido tiene muy buena capacidad discriminatoria para diferenciar aquellos pacientes de la primera clase del resto, la cual corresponde a pacientes con mortalidad estimada menor a un mes. 
+El AUROC combinado de las tres clases obtenido indica que se trata de un buen modelo, con buena capacidad diagnóstica, especialmente en la clase con mayor valor médico, la de los pacientes que fallecen antes de un mes de su alta hospitalaria. Obtenemos una capacidad predictoria también buena para la clase superior a un año, aunque moderada para el grupo de entre 1 y 12 meses. 
 
 En cuanto a la matriz de confusión normalizada del modelo, obtenemos el siguiente resultado: 
 
 ![](C:\mimic-iii-project\plots\Evaluation\matriz_confusion_normalizada_seaborn.png)
 
 De nuevo, se observa que el modelo posee dificultades para discernir pacientes en el intervalo de 1 a 12 meses, aunque no lo hace para las otras dos clases.
+
+El reporte de métricas de evaluación para las tres clases es el siguiente.
 
 | Clase        | Precisión | Recall | F1 Score |
 | ------------ | --------- | ------ | -------- |

@@ -108,9 +108,12 @@ MORTALITY_QUERY = """
                  """
                                  
                                 
-ADMISSION_DATA_QUERY = """SELECT hadm_id, subject_id, admittime, dischtime
-                            FROM admissions
-                            ORDER BY subject_id"""
+ADMISSION_DATA_QUERY = """SELECT hadm_id, p.subject_id, admittime, dischtime
+                        FROM admissions a
+                        INNER JOIN patients p
+                        ON a.subject_id = p.subject_id
+                        WHERE EXTRACT(epoch FROM (a.admittime - p.dob)) / (365 * 24 * 3600) BETWEEN 18 AND 80
+                        ORDER BY subject_id ASC"""
                             
 MORTALITY_TIME_QUERY = """SELECT hadm_id, EXTRACT(epoch FROM (dod-dischtime))/(3600*24) AS expire_days
                             FROM admissions a

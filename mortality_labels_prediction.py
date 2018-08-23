@@ -15,7 +15,7 @@ from sklearn.metrics import confusion_matrix, classification_report, precision_s
 import time
 from keras.optimizers import SGD, Adam, RMSprop, Adagrad
 from hyperopt import hp, Trials, fmin, tpe
-
+import keras.layers.advanced_activations
 nn_data =  get_neural_network_data.get_nn_data();
 
 X_train = nn_data['mortality_data']['X_train'];
@@ -82,7 +82,7 @@ params = {'n_layers':6,
                 };
 
 
-optimal_mse = train_neural_newtork(X_train, Y_train, X_test, Y_test, optimal_mse_params)
+optimal_mse = train_neural_newtork(X_train, Y_train, X_test, Y_test, params)
 
 ### AUROC PLOTS
 
