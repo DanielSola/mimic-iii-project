@@ -14,4 +14,3 @@ One of the most relevant medical outcomes is out-of-hospital mortality of patien
 
 Key Words: *Artificial Neural Networks*, *Data mining*, *Artificial Intelligence* , *Mortality prediction*, *Deep Learning*, *Intensive Care Unit*
 
-# 

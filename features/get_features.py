@@ -16,7 +16,21 @@ import numpy as np
 
 class Features():
     
+    def get_features(self):
+        categorical_features = self.get_categorical_features();
+        numerical_features = self.get_numerical_features();        
+        return pd.merge(numerical_features, categorical_features, left_index = True, right_index = True, how = 'inner');
+
     def get_nn_features(self):
+
+        categorical_features = self.get_categorical_features();
+        numerical_features = self.get_numerical_features();        
+        numerical_features_to_nn = preprocessing_service.prepare_numerical_features(numerical_features);
+        categorical_features_to_nn = preprocessing_service.hot_encode_categorical_features(categorical_features);       
+        
+        return pd.merge(categorical_features_to_nn, numerical_features_to_nn, left_index = True, right_index = True, how = 'inner');
+
+    def get_prediction_features(self, prediction_features):
 
         categorical_features = self.get_categorical_features();
         numerical_features = self.get_numerical_features();        
@@ -35,15 +49,18 @@ class Features():
         previous_admission_count = self.ICUData()._get_previous_admissions_count();
         procedure_count = self.ICUData()._get_procedure_count();
         severity_scores = self.ICUData()._get_severity_scores();
+        glascow_coma_scale = self.ICUData()._get_glasgow_coma_scale();
         mech_vent_time = self.ICUData()._get_mechanical_ventilation_time();
         ##hospital_expire_flag = self.ICUData()._get_hospital_expire_flag();
 
-        numerical_features_dfs = [ age, measures, icu_los, total_los, previous_admission_count, procedure_count, severity_scores, mech_vent_time ];     
+        numerical_features_dfs = [ age, measures, icu_los, total_los, previous_admission_count, procedure_count, severity_scores, glascow_coma_scale, mech_vent_time ];     
         numerical_features = reduce(lambda left, right: pd.merge(left,right, on = 'hadm_id', how = 'outer'), numerical_features_dfs);
                 
         numerical_features['total_mech_vent_time'].fillna(0, inplace = True);
         numerical_features['procedure_count'].fillna(1, inplace = True);
-        numerical_features.set_index('hadm_id', drop=True, inplace = True);        
+        numerical_features['gcs'].fillna(13, inplace = True);
+        numerical_features.set_index('hadm_id', drop=True, inplace = True);    
+        numerical_features.drop('subject_id', inplace = True, axis = 1);
 
         return numerical_features;
     
@@ -227,6 +244,10 @@ class Features():
                     
             return query_database(SEVERITY_SCORES_QUERY);
         
+        def _get_glasgow_coma_scale(self):
+            
+            return query_database(GLASGOW_COMA_SCALE_QUERY);
+        
         def _get_mechanical_ventilation_time(self):
                     
             return query_database(MECHANICAL_VENTILATION_TIME_QUERY);
@@ -245,6 +266,7 @@ class Features():
             previous_admissions_count = self._get_previous_admissions_count();
             procedure_count           = self._get_procedure_count();
             severity_scores           = self._get_severity_scores();
+            glasgow_coma_scale        = self._get_glasgow_coma_scale();
             mechanical_vent_time      = self._get_mechanical_ventilation_time();
             hospital_expire_flag      = self._get_hospital_expire_flag();
             
@@ -256,6 +278,7 @@ class Features():
                          previous_admissions_count,
                          procedure_count,
                          severity_scores,
+                         glasgow_coma_scale,
                          mechanical_vent_time,
                          hospital_expire_flag];
             

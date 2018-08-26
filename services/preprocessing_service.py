@@ -186,6 +186,7 @@ def calculate_imputation_error(feature, numerical_data, numerical_features):
 def impute_missing_values(numerical_features):
     imputed_numerical_features = pd.DataFrame(MICE().complete(numerical_features));
     imputed_numerical_features.columns = numerical_features.columns;
+    imputed_numerical_features.set_index(numerical_features.index, inplace = True);
     
     return imputed_numerical_features;
 

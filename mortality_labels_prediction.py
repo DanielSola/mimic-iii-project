@@ -2,64 +2,37 @@
 MIMIC-III Project
 @author: Daniel Solá
 """
-import itertools
 
+import itertools
 import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.realpath('__file__')));
 import pandas as pd
-from neural_network import get_neural_network_data
-from keras.layers import Dense
-from keras.models import Sequential
 from sklearn.metrics import confusion_matrix, classification_report, precision_score, recall_score, log_loss, f1_score, mean_squared_error, roc_auc_score, accuracy_score
 import time
+from services.plotting_service import *
+from services.neural_network_service import *
+from services.preprocessing_service import *
+from features.get_features import *
 from keras.optimizers import SGD, Adam, RMSprop, Adagrad
 from hyperopt import hp, Trials, fmin, tpe
 import keras.layers.advanced_activations
-nn_data =  get_neural_network_data.get_nn_data();
 
+#Query and prepreocess data
+nn_data =  NeuralNetworkService().get_nn_data();
+categorical_features = Features().get_categorical_features();
+numerical_features = Features().get_numerical_features();
+imputed_numerical_features = impute_missing_values(numerical_features);
+
+#Split into training and test set
 X_train = nn_data['mortality_data']['X_train'];
 X_test = nn_data['mortality_data']['X_test'];
 Y_train = nn_data['mortality_data']['Y_train'];
 Y_test = nn_data['mortality_data']['Y_test'];
 
-def train_neural_newtork(X_train, Y_train, X_test, Y_test, params):
-    print(params);
-    n_layers = params['n_layers'];
-    n_neurons = params['n_neurons'];
-    batch_size = params['batch_size'];
-    epochs = params['epochs'];
-    optimizer = params['optimizer'];
-    
-    model = Sequential();
-    for i in range(n_layers):
-        model.add(Dense(n_neurons, activation='relu', input_shape=(101,)))
-    model.add(Dense(3, activation='softmax'));
-    model.compile(loss='binary_crossentropy',
-                  optimizer=optimizer,
-                  metrics=['accuracy', 'mse'])
-    start_time = time.time();
-    model.fit(X_train, Y_train,epochs=epochs, batch_size=batch_size, verbose=1);
-    elapsed_time = time.time() - start_time;
-    #Evaluating model
-    Y_pred = model.predict(X_test);
-    Y_train_pred = pd.get_dummies(model.predict(X_train).argmax(axis = 1));
-    Y_test_pred = pd.get_dummies(Y_pred.argmax(axis = 1));
-    #Train and test accuracies
-    train_accuracy = accuracy_score(Y_train, Y_train_pred);
-    test_accuracy = accuracy_score(Y_test, Y_test_pred);
-    f1_score_model = f1_score(Y_test_pred, Y_test, average = 'samples');
-    loss, accuracy, mse = model.evaluate(X_test, Y_test,verbose=0)
-    roc_auroc = roc_auc_score(Y_test, Y_pred);
-    print(train_accuracy, test_accuracy, f1_score_model, loss, mse, roc_auroc);
-    return 1-roc_auroc;
-
 #Hyperparameter tuning by Bayesian optimization
-
-
 def f(params):
     return train_neural_newtork(X_train, Y_train, X_test, Y_test, params);
-
 
 params_space = {'n_layers': hp.choice('n_layers', range(2,8)),
                     'n_neurons': hp.choice('n_neurons', [8, 16, 32, 64]),
@@ -72,20 +45,72 @@ trials_mse = Trials()
 
 best = fmin(fn=f, space=params_space, algo=tpe.suggest, max_evals=50, trials=trials_mse);
 
-## Optimal MSE params
-
+# Training neural network with optimal paremeters
 params = {'n_layers':6,
-                    'n_neurons':16,
-                    'optimizer': 'Adam',
-                    'epochs':50,
-                    'batch_size':50
-                };
+          'n_neurons':16,
+          'optimizer': 'Adam',
+          'epochs':50,
+          'batch_size':50
+          };
+          
+keras_model = NeuralNetworkService().train_neural_network(X_train, Y_train, X_test, Y_test, params);
+
+#Define patient features
+patient_categorical_features = {'gender': 'M',
+                                 'marital_status':'SINGLE',
+                                 'religion':'CHRISTIAN',
+                                 'ethnicity':'WHITE',
+                                 'service':'CSURG',
+                                 'icd9_group':'diseases of the circulatory system',
+                                 'SURGERY_FLAG':'NARROW'
+                                };
+                                
+patient_numerical_features = {'age':80,
+                              'total_icu_time':10,
+                              'total_los_days':12,
+                              'admissions_count':3,
+                              'procedure_count':4,
+                              'oasis_avg':40,
+                              'sofa_avg':7,
+                              'saps_avg':20,
+                              'gcs':9,
+                              'total_mech_vent_time':130
+                              };
+
+patient_lab_tests = {'blood_urea_nitrogen': [23, 24, 24],
+                     'platelet_count':[230, 240],
+                     'hematocrit':[33, 35],
+                     'potassium': [3.9,3.8,4.4],
+                     'sodium':[140, 139],
+                     'creatinine':[1.3,1.2,1.3],
+                     'bicarbonate':[25,26],
+                     'white_blood_cells':[8.5,9,13],
+                     'blood_glucose':[130, 135,140],
+                     'albumin':[3.5, 3.4]
+                     };
+
+patient_physio_measures = {'heart_rate':[100,108,105,99],
+                           'resp_rate':[22,25,23],
+                           'sys_press':[120, 121, 115],
+                           'dias_press':[70,80,85],
+                           'temp':[98, 98.2, 97.8],
+                           'spo2':[97,97.8,98]
+                           };
+
+patient_features = {
+        'patient_categorical_features':patient_categorical_features,
+        'patient_numerical_features':patient_numerical_features,
+        'patient_lab_tests':patient_lab_tests,
+        'patient_physio_measures':patient_physio_measures
+        };
 
 
-optimal_mse = train_neural_newtork(X_train, Y_train, X_test, Y_test, params)
+# Preprocess prediction data and predict
+prediction_data = NeuralNetworkService().preprocess_prediction_data(patient_features, imputed_numerical_features, categorical_features);
+prediction = keras_model.predict(prediction_data);
+
 
 ### AUROC PLOTS
-
 
 n_clases = 3
 fpr = dict()
@@ -183,3 +208,5 @@ def plot_confusion_matrix_seaborn(cm):
 plot_confusion_matrix_seaborn(cm)
 
 print(classification_report(Y_test_ravel, Y_pred_ravel))
+
+

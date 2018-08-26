@@ -56,7 +56,7 @@ ICU_LOS_QUERY = """SELECT hadm_id, sum(los) AS total_icu_time
 TOTAL_LOS_QUERY = """SELECT hadm_id, 
                      EXTRACT(epoch FROM(dischtime - admittime))/(3600*24) AS total_los_days
                      FROM admissions"""
-                     
+                
 PREVIOUS_ADMISSIONS_QUERY = """SELECT hadm_id, subject_id, admittime
                                FROM admissions
                                ORDER BY admittime ASC"""
@@ -78,6 +78,12 @@ SEVERITY_SCORES_QUERY = """SELECT o.hadm_id, AVG(o.oasis) AS oasis_avg, AVG(so.s
                            INNER JOIN saps sa
                            ON sa.hadm_id = so.hadm_id
                            GROUP BY o.hadm_id"""
+                           
+GLASGOW_COMA_SCALE_QUERY = """SELECT hadm_id, AVG(gcs) AS GCS
+                              FROM pivoted_gcs gcs
+                              INNER JOIN icustays i
+                              ON gcs.icustay_id = i.icustay_id
+                              GROUP by hadm_id"""
                            
 MORTALITY_QUERY = """   
                         SELECT hadm_id,
