@@ -704,6 +704,18 @@ El resultado de SAPS es mejor empleado para contrastar la gravedad de grupos de 
 
 OASIS, Oxford Acute Severity of Illness Score, se trata de un indicador de severidad diseñado en 2013 por Johnson AE1, Kramer AA, Clifford GD, de la Universidad de Oxford. Se caracteriza por emplear técnicas de aprendizaje automático, en concreto optimización por enjambre de partículas, y por no requerir un gran trabajo de recolección de información, ya que requiere unicamente diez características, excluyendo medidas de laboratorio, o informacion sobre diagnósticos y comorbilidades.
 
+### Escala de coma de Glasgow
+
+Se trata de una escala neurológica diseñada para medir facilmente y de forma objetiva el estado de cosciencia de una persona. Un paciente es puntuado segun unos criterios en diversos aspectos, y la suma de puntuaciones otorga una puntuación entre 3, indicando profunda inconsciencia, y 14, indicando un estado de alerta normal.
+
+Se emplea también como variable para calcular los indicadores de severidad OASIS, SAPS y SOFA.  Se calcula siguiendo los criterios siguientes:
+
+| Variable             | Respuesta                                                    | Puntaje                                                      |
+| -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **Apertura ocular**  | Espontánea<br />A la orden<br />Ante un estímulo doloroso<br />Ausencia de apertura ocular | 4 puntos <br />3 puntos<br />2 puntos<br />1 punto           |
+| **Respuesta verbal** | Orientado correctamente<br />Paciente confuso<br />Lenguaje inapropiado<br />Lenguaje incomprensible<br />Carencia de actividad verbal | 5 puntos<br />4 puntos<br />3 puntos<br />2 puntos<br />1 punto |
+| **Respuesta motora** | Obedece órdenes correctamente<br />Localiza estímulos dolorosos<br />Responde al estimulo doloroso pero no localiza<br />Respuesta con flexión anormal de los miembros<br />Respuesta con extensión anormal de los miembros<br />Ausencia de respuesta motora | 6 puntos<br />5 puntos<br />4 puntos<br />3 puntos<br />2 puntos<br />1 punto |
+
 ### Tiempo en ventilación mecánica
 
 Empleando de nuevo una vista materializada disponible en el repositorio de código de MIMIC-III, obtenemos el tiempo que pasa cada paciente en ventilación mecánica durante su estáncia hospitalaria. Utilizamos la siguiente consulta sobre la vista VENTDURATIONS.
