@@ -1,0 +1,32 @@
+\contentsline {chapter}{Resumen}{2}
+\contentsline {chapter}{Abstract}{3}
+\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{4}
+\contentsline {section}{\numberline {1.1}Objetivos y alcance}{4}
+\contentsline {chapter}{\numberline {2}Descripci\IeC {\'o}n del conjunto de datos}{5}
+\contentsline {section}{\numberline {2.1}Deidentifaci\IeC {\'o}n, privacidad y condiciones de acceso}{5}
+\contentsline {section}{\numberline {2.2}Tablas}{6}
+\contentsline {section}{\numberline {2.3}Variable a predecir: mortalidad extra-hospitalaria}{8}
+\contentsline {section}{\numberline {2.4}Variables predictorias}{10}
+\contentsline {subsection}{\numberline {2.4.1}Informaci\IeC {\'o}n demogr\IeC {\'a}fica}{10}
+\contentsline {subsubsection}{Edad}{10}
+\contentsline {subsubsection}{Sexo}{11}
+\contentsline {subsubsection}{Estado Civil}{11}
+\contentsline {subsubsection}{Religion}{12}
+\contentsline {subsubsection}{Etnicidad}{12}
+\contentsline {subsection}{\numberline {2.4.2}Pruebas de laboratorio}{13}
+\contentsline {subsection}{\numberline {2.4.3}Se\IeC {\~n}ales fisiol\IeC {\'o}gicas}{13}
+\contentsline {subsection}{\numberline {2.4.4}Informaci\IeC {\'o}n hospitalaria}{15}
+\contentsline {paragraph}{Servicio m\IeC {\'e}dico}{15}
+\contentsline {paragraph}{Grupo de diagn\IeC {\'o}stico ICD9}{15}
+\contentsline {paragraph}{Realizaci\IeC {\'o}n de cirug\IeC {\'\i }a}{16}
+\contentsline {paragraph}{Duraci\IeC {\'o}n de estancia en UCI}{18}
+\contentsline {paragraph}{Duraci\IeC {\'o}n de est\IeC {\'a}ncia hospitalaria}{19}
+\contentsline {paragraph}{Recuento de admisiones}{19}
+\contentsline {paragraph}{Recuento de procedimientos}{19}
+\contentsline {paragraph}{Tiempo en ventilaci\IeC {\'o}n mec\IeC {\'a}nica}{19}
+\contentsline {subsubsection}{Indicadores de severidad}{20}
+\contentsline {paragraph}{SOFA}{20}
+\contentsline {paragraph}{SAPS}{20}
+\contentsline {paragraph}{OASIS}{21}
+\contentsline {paragraph}{Escala de coma de Glasgow}{21}
+\contentsline {paragraph}{Tiempo en ventilaci\IeC {\'o}n mec\IeC {\'a}nica}{21}
