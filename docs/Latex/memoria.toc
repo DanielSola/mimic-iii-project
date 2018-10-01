@@ -5,28 +5,67 @@
 \contentsline {chapter}{\numberline {2}Descripci\IeC {\'o}n del conjunto de datos}{5}
 \contentsline {section}{\numberline {2.1}Deidentifaci\IeC {\'o}n, privacidad y condiciones de acceso}{5}
 \contentsline {section}{\numberline {2.2}Tablas}{6}
-\contentsline {section}{\numberline {2.3}Variable a predecir: mortalidad extra-hospitalaria}{8}
+\contentsline {section}{\numberline {2.3}Variable a predecir: mortalidad extrahospitalaria}{8}
 \contentsline {section}{\numberline {2.4}Variables predictorias}{10}
 \contentsline {subsection}{\numberline {2.4.1}Informaci\IeC {\'o}n demogr\IeC {\'a}fica}{10}
 \contentsline {subsubsection}{Edad}{10}
 \contentsline {subsubsection}{Sexo}{11}
 \contentsline {subsubsection}{Estado Civil}{11}
-\contentsline {subsubsection}{Religion}{12}
+\contentsline {subsubsection}{Religi\IeC {\'o}n}{12}
 \contentsline {subsubsection}{Etnicidad}{12}
 \contentsline {subsection}{\numberline {2.4.2}Pruebas de laboratorio}{13}
-\contentsline {subsection}{\numberline {2.4.3}Se\IeC {\~n}ales fisiol\IeC {\'o}gicas}{13}
+\contentsline {subsection}{\numberline {2.4.3}Se\IeC {\~n}ales fisiol\IeC {\'o}gicas}{14}
 \contentsline {subsection}{\numberline {2.4.4}Informaci\IeC {\'o}n hospitalaria}{15}
 \contentsline {paragraph}{Servicio m\IeC {\'e}dico}{15}
-\contentsline {paragraph}{Grupo de diagn\IeC {\'o}stico ICD9}{15}
-\contentsline {paragraph}{Realizaci\IeC {\'o}n de cirug\IeC {\'\i }a}{16}
-\contentsline {paragraph}{Duraci\IeC {\'o}n de estancia en UCI}{18}
-\contentsline {paragraph}{Duraci\IeC {\'o}n de est\IeC {\'a}ncia hospitalaria}{19}
-\contentsline {paragraph}{Recuento de admisiones}{19}
-\contentsline {paragraph}{Recuento de procedimientos}{19}
-\contentsline {paragraph}{Tiempo en ventilaci\IeC {\'o}n mec\IeC {\'a}nica}{19}
-\contentsline {subsubsection}{Indicadores de severidad}{20}
-\contentsline {paragraph}{SOFA}{20}
-\contentsline {paragraph}{SAPS}{20}
-\contentsline {paragraph}{OASIS}{21}
-\contentsline {paragraph}{Escala de coma de Glasgow}{21}
-\contentsline {paragraph}{Tiempo en ventilaci\IeC {\'o}n mec\IeC {\'a}nica}{21}
+\contentsline {paragraph}{Grupo de diagn\IeC {\'o}stico ICD-9}{16}
+\contentsline {paragraph}{Realizaci\IeC {\'o}n de cirug\IeC {\'\i }a}{17}
+\contentsline {paragraph}{Duraci\IeC {\'o}n de estancia en UCI}{17}
+\contentsline {paragraph}{Duraci\IeC {\'o}n de estancia hospitalaria}{18}
+\contentsline {paragraph}{Recuento de admisiones}{18}
+\contentsline {paragraph}{Recuento de procedimientos}{18}
+\contentsline {paragraph}{Tiempo en ventilaci\IeC {\'o}n mec\IeC {\'a}nica}{18}
+\contentsline {subsubsection}{Indicadores de severidad}{19}
+\contentsline {paragraph}{SOFA}{19}
+\contentsline {paragraph}{SAPS}{19}
+\contentsline {paragraph}{OASIS}{20}
+\contentsline {paragraph}{Escala de coma de Glasgow}{20}
+\contentsline {paragraph}{Tiempo en ventilaci\IeC {\'o}n mec\IeC {\'a}nica}{20}
+\contentsline {chapter}{\numberline {3}Modelo predictivo}{21}
+\contentsline {section}{\numberline {3.1}Tecnolog\IeC {\'\i }as utilizadas}{22}
+\contentsline {section}{\numberline {3.2}Preparaci\IeC {\'o}n de datos}{22}
+\contentsline {subsection}{\numberline {3.2.1}Imputaci\IeC {\'o}n de valores faltantes (MICE)}{22}
+\contentsline {subsection}{\numberline {3.2.2}Normalizaci\IeC {\'o}n de variables num\IeC {\'e}ricas}{23}
+\contentsline {subsection}{\numberline {3.2.3}Codificaci\IeC {\'o}n de variables categ\IeC {\'o}ricas}{24}
+\contentsline {subsection}{\numberline {3.2.4}Divisi\IeC {\'o}n en conjunto de entrenamiento y evaluaci\IeC {\'o}n}{24}
+\contentsline {section}{\numberline {3.3}Sobreajuste y sobregeneralizaci\IeC {\'o}n}{25}
+\contentsline {section}{\numberline {3.4}M\IeC {\'e}tricas de evaluaci\IeC {\'o}n}{25}
+\contentsline {subsubsection}{Precisi\IeC {\'o}n de clasificaci\IeC {\'o}n}{25}
+\contentsline {subsubsection}{F1 Score}{25}
+\contentsline {subsubsection}{Error cuadr\IeC {\'a}tico medio}{26}
+\contentsline {subsubsection}{AUROC (Area Under Receiver Operating Characteristic)}{26}
+\contentsline {section}{\numberline {3.5}Par\IeC {\'a}metros e hiperpar\IeC {\'a}metros}{26}
+\contentsline {subsection}{\numberline {3.5.1}Ajuste de par\IeC {\'a}metros e hiperpar\IeC {\'a}metros}{27}
+\contentsline {subsection}{\numberline {3.5.2}Optimizaci\IeC {\'o}n Bayesiana}{27}
+\contentsline {section}{\numberline {3.6}Arquitectura y par\IeC {\'a}metros escogidos}{28}
+\contentsline {section}{\numberline {3.7}Evaluaci\IeC {\'o}n del modelo}{30}
+\contentsline {section}{\numberline {3.8}Ejemplo de uso}{31}
+\contentsline {section}{\numberline {3.9}Comparativa de rendimiento}{33}
+\contentsline {paragraph}{Mortality prediction in intensive care units with the Super ICU Learner Algorithm (SICULA): a population-based study.}{33}
+\contentsline {paragraph}{Mortality prediction with self normalizing neural networks in intensive care unit patients}{33}
+\contentsline {paragraph}{A machine learning approach to predicting short-term mortality risk for patients starting chemotherapy.}{33}
+\contentsline {chapter}{\numberline {4}An\IeC {\'a}lisis econ\IeC {\'o}mico}{35}
+\contentsline {section}{\numberline {4.1}Costes directos}{35}
+\contentsline {section}{\numberline {4.2}Costes indirectos}{35}
+\contentsline {chapter}{\numberline {5}An\IeC {\'a}lisis del impacto ambiental}{36}
+\contentsline {chapter}{\numberline {6}Bibliograf\IeC {\'\i }a}{37}
+\contentsline {chapter}{Anexos}{38}
+\contentsline {section}{\numberline {6.1}C\IeC {\'o}digo empleado}{38}
+\contentsline {paragraph}{Ajuste de hiperpar\IeC {\'a}metros y entreno del modelo}{38}
+\contentsline {paragraph}{Realizaci\IeC {\'o}n de predicciones}{39}
+\contentsline {paragraph}{Definici\IeC {\'o}n de la red neuronal}{40}
+\contentsline {paragraph}{Normalizaci\IeC {\'o}n de variables num\IeC {\'e}ricas}{40}
+\contentsline {paragraph}{Extracci\IeC {\'o}n del servicio m\IeC {\'e}dico m\IeC {\'a}s relevante}{41}
+\contentsline {paragraph}{Imputaci\IeC {\'o}n de valores faltantes}{41}
+\contentsline {paragraph}{Eliminaci\IeC {\'o}n de outliers}{41}
+\contentsline {paragraph}{Consultas a base de datos}{42}
+\contentsline {paragraph}{Agrupaci\IeC {\'o}n de c\IeC {\'o}digos ICD-9 de diagn\IeC {\'o}stico}{44}

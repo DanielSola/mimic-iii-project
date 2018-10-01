@@ -123,50 +123,6 @@ def group_diag_icd9_code(icd9_code):
         return 'external causes of injury';
     if 'V' in icd9_code: 
         return 'supplementary classification of factors influencing health status';    
-
-def extract_readmissions(admissions_data):
-    
-    total_readmissions = [];
-    for index in range(admissions_data.shape[0] - 1):
-        if admissions_data.ix[index].subject_id == admissions_data.ix[index + 1].subject_id:
-            
-            if (
-                (admissions_data.ix[index + 1].admittime - admissions_data.ix[index].dischtime).days < (30 * 12)
-                and 
-                (admissions_data.ix[index + 1].admittime - admissions_data.ix[index].dischtime).days > (30* 0)
-                
-            ):
-                readmission = '0-12 months';
-                
-            if (
-                (admissions_data.ix[index + 1].admittime - admissions_data.ix[index].dischtime).days < (30 * 36)
-                and 
-                (admissions_data.ix[index + 1].admittime - admissions_data.ix[index].dischtime).days >= (30 * 12)
-            ):
-                readmission = '12-36 months';               
-        else:
-            readmission = '36+ months';
-    
-        total_readmissions.append({
-                    'hadm_id': admissions_data.ix[index].hadm_id, 
-                    'readmission': readmission
-                    });
-    
-    return pd.DataFrame(total_readmissions);
-
-def extract_readmission_time(admissions_data):
-    
-    readmission_times = [];
-    for index in range(admissions_data.shape[0] - 1):
-        if admissions_data.ix[index].subject_id == admissions_data.ix[index + 1].subject_id:
-            readmission_days = (admissions_data.ix[index + 1].admittime - admissions_data.ix[index].dischtime).days
-            if readmission_days > 0.5:
-                readmission_times.append({
-                        'hadm_id': admissions_data.ix[index].hadm_id, 
-                        'readmission_days': readmission_days
-                        });
-    
-    return pd.DataFrame(readmission_times);
     
 def calculate_imputation_error(feature, numerical_data, numerical_features):
     numerical_data = numerical_data.copy(deep=True);

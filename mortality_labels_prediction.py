@@ -16,7 +16,6 @@ from services.preprocessing_service import *
 from features.get_features import *
 from keras.optimizers import SGD, Adam, RMSprop, Adagrad
 from hyperopt import hp, Trials, fmin, tpe
-import keras.layers.advanced_activations
 
 #Query and prepreocess data
 nn_data =  NeuralNetworkService().get_nn_data();
