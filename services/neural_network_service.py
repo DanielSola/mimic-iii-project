@@ -8,7 +8,7 @@ from keras.layers import Dense
 from keras.models import Sequential
 import numpy as np
 from sklearn.metrics import confusion_matrix, classification_report, precision_score, recall_score, log_loss, f1_score, mean_squared_error, roc_auc_score, accuracy_score
-from preprocessing_service import *
+from services.preprocessing_service import *
 
 class NeuralNetworkService():
     
@@ -28,25 +28,19 @@ class NeuralNetworkService():
     
         #Extraction of labels
         mortality = PatientOutcomes().get_mortality().set_index('hadm_id');
-        readmission = PatientOutcomes().get_readmissions().set_index('hadm_id');
     
         #Merging of features and labels
         mortality_data = pd.merge(features, mortality, left_index = True, right_index = True, how = 'inner').dropna();
-        readmission_data = pd.merge(features, readmission, left_index = True, right_index = True, how = 'inner').dropna();
     
         #Hot encoding of labels
         hot_encoded_mortality = pd.get_dummies(mortality_data.mortality);
-        hot_encoded_readmissions = pd.get_dummies(readmission_data.readmission);
     
         #Spliting of data in test / train sets
         mortality_features = mortality_data.loc[:, 'F':'total_mech_vent_time'];
-        readmissions_features = readmission_data.loc[:, 'F':'total_mech_vent_time'];
     
         X_train_mortality, X_test_mortality, Y_train_mortality, Y_test_mortality = train_test_split(mortality_features, hot_encoded_mortality, test_size=0.075, random_state=42);
-        X_train_readmission, X_test_readmission, Y_train_readmission, Y_test_readmission = train_test_split(mortality_features, hot_encoded_mortality, test_size=0.075, random_state=42);
     
-        return { 'mortality_data' : {'X_train':X_train_mortality,'X_test': X_test_mortality,'Y_train': Y_train_mortality, 'Y_test':Y_test_mortality },
-                 'readmission_data':  {'X_train':X_train_readmission,'X_test': X_test_readmission,'Y_train': Y_train_readmission, 'Y_test':Y_test_mortality }};
+        return { 'mortality_data' : {'X_train':X_train_mortality,'X_test': X_test_mortality,'Y_train': Y_train_mortality, 'Y_test':Y_test_mortality }};
             
 
     

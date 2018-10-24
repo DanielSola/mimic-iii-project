@@ -31,7 +31,7 @@ Y_test = nn_data['mortality_data']['Y_test'];
 
 #Hyperparameter tuning by Bayesian optimization
 def f(params):
-    return train_neural_newtork(X_train, Y_train, X_test, Y_test, params);
+    return NeuralNetworkService().train_neural_network(X_train, Y_train, X_test, Y_test, params);
 
 params_space = {'n_layers': hp.choice('n_layers', range(2,8)),
                     'n_neurons': hp.choice('n_neurons', [8, 16, 32, 64]),
