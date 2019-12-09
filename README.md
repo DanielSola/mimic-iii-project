@@ -58,7 +58,7 @@ Created neural network able to classify critical patients mortality in three gro
 * 1 - 12 months mortality: 0.72 AUROC, 0.47 accuracy
 * \> 1 month mortality: 0.81 AUROC, 0.57 accuracy
 
-![] (plots/Evaluation/3Curves_ENG.png)
+![](plots/Evaluation/3Curves_ENG.png)
 
 Medium Article : https://medium.com/@daniel.sola.fraire/predicting-patient-mortality-with-deep-learning-f9814bf192da
 
